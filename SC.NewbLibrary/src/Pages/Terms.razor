@@ -1,0 +1,53 @@
+﻿@page "/terms"
+
+@using SC.NewbLibrary.Data
+@inject NewbDataService NewbService
+
+<h1>Terms</h1>
+
+@code {
+    private NewbData[] newbData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        newbData = await NewbService.GetNewbData();
+    }
+}
+
+@if (newbData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    // https://blazor.radzen.com/
+
+    <table>
+        <tr>
+            <th>Term</th>
+            <th>Terse</th>
+            <th>Verbose</th>
+            <th>Link</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (var dataPoint in newbData)
+        {
+            <tr>
+                <td>@dataPoint.Term</td>
+                <td>@dataPoint.Terse</td>
+                <td>@dataPoint.Definition</td>
+                <td>
+                    @if (dataPoint.HasLink)
+                    {
+                        <a href="@dataPoint.UriLink" target="other">@dataPoint.UriLink</a>
+                    }
+                    else
+                    {
+                        @dataPoint.UriLink
+                    }
+                </td>
+                <td><img src="/images/suggest.png" width="32" alt="Suggest an edit" /></td>
+            </tr>
+        }
+    </table>
+}
