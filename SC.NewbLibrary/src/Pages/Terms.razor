@@ -1,6 +1,6 @@
 ﻿@page "/terms"
 
-@using SC.NewbLibrary.Model.Data
+@using SC.NewbLibrary.Model.View
 @using SC.NewbLibrary.Service
 @inject NewbDataService NewbService
 
@@ -14,7 +14,7 @@
 <h1>Terms</h1>
 
 @code {
-    private NewbData[] newbData;
+    private NewbViewData[] newbData;
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,7 +47,7 @@ else
                     <div class="col-link">
                         @if (dataPoint.HasLink)
                         {
-                            <a href="@dataPoint.UriLink" target="other">@dataPoint.UriLink</a>
+                            <a href="@dataPoint.Link" target="other">@dataPoint.Link</a>
                         }
                     </div>
                 </div>

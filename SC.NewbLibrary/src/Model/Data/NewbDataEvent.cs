@@ -15,5 +15,6 @@ namespace SC.NewbLibrary.Model.Data
         public DateTime? ReviewStamp { get; set; }
         public string ReviewUser { get; set; }
         public bool IsApproved { get; set; } = false;
+        public bool IsRejected { get; set; } = false;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SC.NewbLibrary.Model.Data
@@ -12,11 +13,6 @@ namespace SC.NewbLibrary.Model.Data
         public string Terse { get; set; }
         public string Link { get; set; }
 
-        public NewbDataEvent[] EventHistory { get; set; }
-
-        [JsonIgnore]
-        public string UriLink => HasLink ? Link : "[no link]";
-        [JsonIgnore]
-        public bool HasLink => !string.IsNullOrWhiteSpace(Link);
+        public NewbDataEvent[] EventHistory { get; set; } = new List<NewbDataEvent>().ToArray();
     }
 }
