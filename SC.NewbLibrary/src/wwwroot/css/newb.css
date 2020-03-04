@@ -1,0 +1,42 @@
+﻿.main-container {
+    margin: 15px;
+}
+
+.card-container {
+    margin: 5px;
+    padding: 0px 5px;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+}
+
+.card-container:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 3px 0px;
+    /*background-color: silver;*/
+}
+
+.col-edit {
+    width: 32px;
+}
+
+.col-term {
+    width: 155px;
+}
+
+.col-stretch {
+    flex-grow: 3;
+}
+
+.col-link {
+    flex-grow: 1;
+    text-align: right;
+}
