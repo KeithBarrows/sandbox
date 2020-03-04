@@ -22,32 +22,36 @@ else
 {
     // https://blazor.radzen.com/
 
-    <table>
-        <tr>
-            <th>Term</th>
-            <th>Terse</th>
-            <th>Verbose</th>
-            <th>Link</th>
-            <th>Edit</th>
-        </tr>
+    <div class="main-container">
+        <div class="card-row">
+            <div class="col-edit">Edit</div>
+            <div class="col-term">Term</div>
+            <div class="col-stretch">Terse</div>
+            <div class="col-link">Link</div>
+        </div>
         @foreach (var dataPoint in newbData)
         {
-            <tr>
-                <td>@dataPoint.Term</td>
-                <td>@dataPoint.Terse</td>
-                <td>@dataPoint.Definition</td>
-                <td>
-                    @if (dataPoint.HasLink)
-                    {
-                        <a href="@dataPoint.UriLink" target="other">@dataPoint.UriLink</a>
-                    }
-                    else
-                    {
-                        @dataPoint.UriLink
-                    }
-                </td>
-                <td><img src="/images/suggest.png" width="32" alt="Suggest an edit" /></td>
-            </tr>
+            <div class="card-container">
+                <div class="card-row">
+                    <div class="col-edit"><img src="/images/suggest.png" height="16" alt="Suggest an edit" /></div>
+                    <div class="col-term"><strong>@dataPoint.Term</strong></div>
+                    <div class="col-stretch"><strong>@dataPoint.Terse</strong></div>
+                    <div class="col-link">
+                        @if (dataPoint.HasLink)
+                        {
+                            <a href="@dataPoint.UriLink" target="other">@dataPoint.UriLink</a>
+                        }
+                        @*else
+                        {
+                            @dataPoint.UriLink
+                        }*@
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="col-edit"></div>
+                    <div class="col-stretch"><i>@dataPoint.Definition</i></div>
+                </div>
+            </div>
         }
-    </table>
+    </div>
 }
