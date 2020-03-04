@@ -4,6 +4,13 @@
 @using SC.NewbLibrary.Service
 @inject NewbDataService NewbService
 
+@*--------------------------------------------------------------------------------------------------------------------*@
+@* https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/3.x/BlazorWebAssemblySample *@
+@* Includes AJAX calls to a web API                                                                                   *@
+@*--------------------------------------------------------------------------------------------------------------------*@
+
+
+
 <h1>Terms</h1>
 
 @code {
@@ -42,10 +49,6 @@ else
                         {
                             <a href="@dataPoint.UriLink" target="other">@dataPoint.UriLink</a>
                         }
-                        @*else
-                        {
-                            @dataPoint.UriLink
-                        }*@
                     </div>
                 </div>
                 <div class="card-row">
