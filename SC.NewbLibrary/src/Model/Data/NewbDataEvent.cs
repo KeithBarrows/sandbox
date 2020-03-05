@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SC.NewbLibrary.Model.Data
@@ -16,5 +17,8 @@ namespace SC.NewbLibrary.Model.Data
         public string ReviewUser { get; set; }
         public bool IsApproved { get; set; } = false;
         public bool IsRejected { get; set; } = false;
+
+        [JsonIgnore]
+        public bool EventHasLink => !string.IsNullOrWhiteSpace(EventLink);
     }
 }
