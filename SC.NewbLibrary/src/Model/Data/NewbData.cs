@@ -13,6 +13,6 @@ namespace SC.NewbLibrary.Model.Data
         public string Terse { get; set; }
         public string Link { get; set; }
 
-        public NewbDataEvent[] EventHistory { get; set; } = new List<NewbDataEvent>().ToArray();
+        public List<NewbDataEvent> EventHistory { get; set; } = new List<NewbDataEvent>();
     }
 }

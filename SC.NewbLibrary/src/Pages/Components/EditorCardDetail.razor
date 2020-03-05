@@ -1,0 +1,121 @@
+﻿
+<EditForm Model="@DataEvent" OnValidSubmit="HandleValidSubmit">
+    @if (AddMode)
+    {
+        <div class="card-row">
+            <div class="col-edit"></div>
+            <div class="col-term">Term:</div>
+            <div class="col-stretch"><InputText id="eventTerse" @bind-Value="DataEvent.EventTerm" /></div>
+        </div>
+    }
+    <div class="card-row">
+        <div class="col-edit"></div>
+        <div class="col-term">Terse</div>
+        <div class="col-stretch"><InputText id="eventTerse" @bind-Value="DataEvent.EventTerse" /></div>
+    </div>
+    <div class="card-row">
+        <div class="col-edit"></div>
+        <div class="col-term">Link:</div>
+        <div class="col-stretch"><InputText id="eventTerse" @bind-Value="DataEvent.EventLink" /></div>
+    </div>
+    <div class=" card-row">
+        <div class="col-edit"></div>
+        <div class="col-term">Description:</div>
+        <div class="col-stretch"><InputText id="eventDefinition" @bind-Value="DataEvent.EventDefinition" /></div>
+    </div>
+    <div class=" card-row">
+        <div class="col-edit"></div>
+        <div class="col-term"></div>
+        <div class="col-stretch">
+            <button type="submit">@SaveButtonText</button>
+            <button @onclick="CancelAction">Cancel</button>
+        </div>
+    </div>
+</EditForm>
+
+@foreach (var eventData in DataPoint.EventHistory.OrderByDescending(a => a.EventStamp))
+{
+    <hr />
+    <div class="card-row">
+        <div class="col-edit"></div>
+        <div class="col-stretch">
+            [@eventData.EventStamp
+            &nbsp;|&nbsp;
+            @eventData.EventUser
+            &nbsp;|&nbsp;
+            Approved: @eventData.IsApproved]
+            &nbsp;
+
+            <strong>@eventData.EventTerm</strong>
+            &nbsp;|&nbsp;
+            <strong>@eventData.EventTerse</strong>
+            &nbsp;|&nbsp;
+            <i>@eventData.EventDefinition</i>
+            &nbsp;|&nbsp;
+            @eventData.EventLink
+        </div>
+    </div>
+}
+
+
+@namespace SC.NewbLibrary.Pages.Components
+@using SC.NewbLibrary.Model.Data
+@using SC.NewbLibrary.Model.View
+@code {
+    [Parameter]
+    public NewbViewData DataPoint { get; set; }
+    [Parameter]
+    public EventCallback<NewbEventDataArgs> OnSaveCallback { get; set; }
+    [Parameter]
+    public bool EditMode { get; set; } = false;
+    [Parameter]
+    public bool AddMode { get; set; } = false;
+
+    public string SaveButtonText => AddMode ? "Add" : "Submit";
+
+    private NewbDataEvent DataEvent { get; set; } = new NewbDataEvent();
+
+    private void SetEditMode() => EditMode = !EditMode;
+
+    private void CancelAction()
+    {
+        EditMode = false;
+        AddMode = false;
+        DataPoint = new NewbViewData();
+        DataEvent = new NewbDataEvent();
+
+        // https://softchris.github.io/pages/dotnet-blazor.html#learn-how-to-build-your-first-blazor-webassembly-app-in-net-core-3-0
+        // https://visualstudiomagazine.com/articles/2018/10/01/blazor-event-handling.aspx
+        var eventArgs = new NewbEventDataArgs { AddMode = AddMode, EditMode = EditMode };
+        
+    }
+
+    private void HandleValidSubmit()
+    {
+        if (!string.IsNullOrWhiteSpace(DataEvent.EventDefinition) ||
+            !string.IsNullOrWhiteSpace(DataEvent.EventLink) ||
+            !string.IsNullOrWhiteSpace(DataEvent.EventTerm) ||
+            !string.IsNullOrWhiteSpace(DataEvent.EventTerse))
+        {
+            if (AddMode)
+            {
+                DataPoint = new NewbViewData
+                {
+                    Definition = DataEvent.EventDefinition,
+                    Link = DataEvent.EventLink,
+                    Term = DataEvent.EventTerm,
+                    Terse = DataEvent.EventTerse
+                };
+            }
+
+            if (EditMode)
+            {
+                DataEvent.EventStamp = DateTime.UtcNow;
+                DataEvent.EventUser = "Anonymous";       // TODO:  Need the EVE ESI Login Integration piece!
+                DataPoint.EventHistory.Add(DataEvent);
+            }
+        }
+        EditMode = false;
+        AddMode = false;
+    }
+}
