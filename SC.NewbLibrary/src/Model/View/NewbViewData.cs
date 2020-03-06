@@ -1,35 +1,74 @@
 ﻿using SC.NewbLibrary.Model.Data;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace SC.NewbLibrary.Model.View
 {
-    public class NewbViewData : NewbData
+    public class NewbViewData //: NewbData
     {
-        public void ReadEventSource()
+        [StringLength(50)]
+        [Key]
+        public string Term { get; set; }
+        public string Definition
         {
-            if (EventHistory != null && EventHistory.Count() > 0)
+            get
             {
-                var tmpTerm = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventTerm != null && a.IsApproved == true).EventTerm;
-                var tmpDefinition = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventDefinition != null && a.IsApproved == true).EventDefinition;
-                var tmpLink = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventLink != null && a.IsApproved == true).EventLink;
-                var tmpTerse = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventTerse != null && a.IsApproved == true).EventTerse;
-
-                if (!tmpTerm.IsEqualTo(Term))
-                    Term = tmpTerm;
-                if (!tmpDefinition.IsEqualTo(Definition))
-                    Definition = tmpDefinition;
-                if (!tmpLink.IsEqualTo(Link))
-                    Link = tmpLink;
-                if (!tmpTerse.IsEqualTo(Terse))
-                    Terse = tmpTerse;
+                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true).EventDefinition;
+                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventDefinition != null && a.IsApproved == true).EventDefinition;
+                if (original.IsEqualTo(latest))
+                    return original;
+                else
+                    return latest;
             }
+            private set { }
         }
+        public string Terse
+        {
+            get
+            {
+                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true).EventTerse;
+                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventTerse != null && a.IsApproved == true).EventTerse;
+                if (original.IsEqualTo(latest))
+                    return original;
+                else
+                    return latest;
+            }
+            private set { }
+        }
+        public string Link
+        {
+            get
+            {
+                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true).EventLink;
+                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventLink != null && a.IsApproved == true).EventLink;
+                if (original.IsEqualTo(latest))
+                    return original;
+                else
+                    return latest;
+            }
+            private set { }
+        }
+        public List<NewbDataEvent> EventHistory { get; set; } = new List<NewbDataEvent>();
+
 
         [JsonIgnore]
         public bool HasLink => !string.IsNullOrWhiteSpace(Link);
         [JsonIgnore]
         public int SuggestionCount => EventHistory.Count();
+
+        public NewbData DataModel
+        {
+            get
+            {
+                return new NewbData
+                {
+                    Term = this.Term,
+                    EventHistory = this.EventHistory,
+                };
+            }
+        }
     }
 }

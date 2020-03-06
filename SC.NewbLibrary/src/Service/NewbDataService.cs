@@ -38,13 +38,9 @@ namespace SC.NewbLibrary.Service
             var result = new List<NewbViewData>();
             newbData.ToList().ForEach(a => result.Add(new NewbViewData
             {
-                Definition = a.Definition,
-                Link = a.Link,
                 Term = a.Term,
-                Terse = a.Terse,
                 EventHistory = a.EventHistory
             }));
-            result.ForEach(a => a.ReadEventSource());
 
             return Task.FromResult(result.ToArray());
         }

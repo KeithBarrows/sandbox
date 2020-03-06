@@ -5,23 +5,23 @@
         <div class="card-row">
             <div class="col-edit"></div>
             <div class="col-term">Term:</div>
-            <div class="col-stretch"><InputText id="eventTerse" @bind-Value="DataEvent.EventTerm" /></div>
+            <div class="col-stretch"><InputText id="eventTerm" bind="@DataEvent.EventTerm" placeholder="Term or acronym" /></div>
         </div>
     }
     <div class="card-row">
         <div class="col-edit"></div>
         <div class="col-term">Terse</div>
-        <div class="col-stretch"><InputText id="eventTerse" @bind-Value="DataEvent.EventTerse" /></div>
+        <div class="col-stretch"><InputText id="eventTerse" bind="@DataEvent.EventTerse" placeholder="Short description" /></div>
     </div>
     <div class="card-row">
         <div class="col-edit"></div>
         <div class="col-term">Link:</div>
-        <div class="col-stretch"><InputText id="eventTerse" @bind-Value="DataEvent.EventLink" /></div>
+        <div class="col-stretch"><InputText id="eventLink" bind="@DataEvent.EventLink" placeholder="Supporting resource link" /></div>
     </div>
     <div class=" card-row">
         <div class="col-edit"></div>
         <div class="col-term">Description:</div>
-        <div class="col-stretch"><InputText id="eventDefinition" @bind-Value="DataEvent.EventDefinition" /></div>
+        <div class="col-stretch"><InputText id="eventDefinition" bind="@DataEvent.EventDefinition" placeholder="Full definition" /></div>
     </div>
     <div class=" card-row">
         <div class="col-edit"></div>
@@ -58,6 +58,8 @@
 @namespace SC.NewbLibrary.Pages.Components
 @using SC.NewbLibrary.Model.Data
 @using SC.NewbLibrary.Model.View
+@using SC.NewbLibrary.Service
+@inject NewbDataState NewbState
 @code {
     [Parameter]
     public NewbViewData DataPoint { get; set; }
@@ -84,7 +86,7 @@
         // https://softchris.github.io/pages/dotnet-blazor.html#learn-how-to-build-your-first-blazor-webassembly-app-in-net-core-3-0
         // https://visualstudiomagazine.com/articles/2018/10/01/blazor-event-handling.aspx
         var eventArgs = new NewbEventDataArgs { AddMode = AddMode, EditMode = EditMode };
-        
+
     }
 
     private void HandleValidSubmit()
@@ -98,10 +100,7 @@
             {
                 DataPoint = new NewbViewData
                 {
-                    Definition = DataEvent.EventDefinition,
-                    Link = DataEvent.EventLink,
                     Term = DataEvent.EventTerm,
-                    Terse = DataEvent.EventTerse
                 };
             }
 
