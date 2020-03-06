@@ -14,7 +14,12 @@
 
 
 <h1>NEWB (New Eden Word Bank) <button class="buttonSuggest" @onclick="SetAddMode"><img src="/images/suggest.png" height="32" alt="Suggest an new term" /> Suggest a new term</button></h1>
-<p><a href="https://chrome.google.com/webstore/detail/new-eden-word-bank-newb/maaojdhplffpbflhoggcckalfhhigjan" target="_blank">Add the Chrome Extension</a></p>
+<p><i><a href="https://chrome.google.com/webstore/detail/new-eden-word-bank-newb/maaojdhplffpbflhoggcckalfhhigjan" target="_blank">Add the Chrome Extension</a></i></p>
+<button @onclick="FilterAction">All</button>
+@for (var txt = (int)'A'; txt <= (int)'Z'; txt++)
+{
+    <button onclick="FilterAction">@((char)txt)</button>
+}
 
 @if (newbData == null)
 {
@@ -27,7 +32,7 @@ else
         {
             <EditorCardDetail DataPoint="@DataPoint" AddMode="true" />
         }
-        @foreach (var dataPoint in newbData)
+        @foreach (var dataPoint in newbData.Where(a => a.Term.StartsWith(SearchLetter, StringComparison.OrdinalIgnoreCase)))
         {
             <EditorCard DataPoint="dataPoint" />
         }
@@ -38,6 +43,8 @@ else
 
 @code {
     private NewbViewData[] newbData;
+    private string SearchLetter { get; set; } = "A";
+    //private string All = "All";
 
     protected override async Task OnInitializedAsync()
     {
@@ -48,4 +55,9 @@ else
     public bool AddMode { get; set; } = false;
 
     private void SetAddMode() => AddMode = !AddMode;
+
+    private void FilterAction()
+    {
+
+    }
 }

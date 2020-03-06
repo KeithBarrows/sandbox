@@ -37,22 +37,19 @@
 {
     <hr />
     <div class="card-row">
-        <div class="col-edit"></div>
-        <div class="col-stretch">
-            [@eventData.EventStamp
-            &nbsp;|&nbsp;
-            @eventData.EventUser
-            &nbsp;|&nbsp;
-            Approved: @eventData.IsApproved]
-            &nbsp;
-
-            <strong>@eventData.EventTerm</strong>
-            &nbsp;|&nbsp;
-            <strong>@eventData.EventTerse</strong>
-            &nbsp;|&nbsp;
-            <i>@eventData.EventDefinition</i>
-            &nbsp;|&nbsp;
-            @eventData.EventLink
+        <div class="history">
+            @*<div class="col-edit"></div>*@
+            <div class="history-text">
+                <div class="@eventData.ClassTerm @eventData.ClassApproval">@(eventData.EventTerm ?? @DataPoint.Term)</div>
+                <div class="@eventData.ClassTerse @eventData.ClassApproval">@(eventData.EventTerse ?? @DataPoint.Terse)</div>
+                <div class="@eventData.ClassDefinition @eventData.ClassApproval">@(eventData.EventDefinition ?? @DataPoint.Definition)</div>
+                <div class="@eventData.ClassLink @eventData.ClassApproval">@(eventData.EventLink ?? @DataPoint.Link)</div>
+            </div>
+            <div class="history-stamp">
+                <div class="@eventData.ClassApproval">@eventData.EventStamp</div>
+                <div class="@eventData.ClassApproval">@eventData.EventUser</div>
+                <div class="@eventData.ClassApproval">@eventData.ApprovalText</div>
+            </div>
         </div>
     </div>
 }

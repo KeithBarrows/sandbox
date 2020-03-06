@@ -5,21 +5,17 @@
                 <button class="buttonSuggest" @onclick="SetEditMode" title="Suggest an edit!"><img src="/images/suggest.png" height="16" alt="Suggest an edit" /></button>
             </div>
             <div class="col-term"><strong>@DataPoint.Term</strong></div>
-            <div class="col-stretch"><strong>@DataPoint.Terse</strong></div>
-        </div>
-        <div class="card-row">
-            <div class="col-edit">@DataPoint.SuggestionCount</div>
-            <div class="col-stretch"><i>@DataPoint.Definition</i></div>
-        </div>
-        <div class="card-row">
-            <div class="col-edit"></div>
-            <div class="col-link">
-                Link: &nbsp;
+            <div class="col-terse"><strong>@DataPoint.Terse</strong></div>
+            <div class="col-stretch">
                 @if (DataPoint.HasLink)
                 {
                     <a href="@DataPoint.Link" target="other">@DataPoint.Link</a>
                 }
             </div>
+        </div>
+        <div class="card-row">
+            <div class="col-edit">@DataPoint.SuggestionCount</div>
+            <div class="col-stretch"><i>@DataPoint.Definition</i></div>
         </div>
 
         @if (EditMode || AddMode)
