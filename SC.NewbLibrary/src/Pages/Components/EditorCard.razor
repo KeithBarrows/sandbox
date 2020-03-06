@@ -1,33 +1,35 @@
 ﻿
-    <div class="card-container">
-        <div class="card-row">
-            <div class="col-edit">
-                <button class="buttonSuggest" @onclick="SetEditMode" title="Suggest an edit!"><img src="/images/suggest.png" height="16" alt="Suggest an edit" /></button>
-            </div>
-            <div class="col-term"><strong>@DataPoint.Term</strong></div>
-            <div class="col-terse"><strong>@DataPoint.Terse</strong></div>
-            <div class="col-stretch">
-                @if (DataPoint.HasLink)
-                {
-                    <a href="@DataPoint.Link" target="other">@DataPoint.Link</a>
-                }
-            </div>
+<div class="card-container">
+    <div class="card-row">
+        <div class="col-edit">
+            <button class="buttonSuggest" @onclick="SetEditMode" title="Suggest an edit!"><img src="/images/suggest.png" height="16" alt="Suggest an edit" /></button>
         </div>
-        <div class="card-row">
-            <div class="col-edit">@DataPoint.SuggestionCount</div>
-            <div class="col-stretch"><i>@DataPoint.Definition</i></div>
+        <div class="col-term"><strong>@DataPoint.Term</strong></div>
+        <div class="col-terse"><strong>@DataPoint.Terse</strong></div>
+        <div class="col-stretch">
+            @if (DataPoint.HasLink)
+            {
+                <a href="@DataPoint.Link" target="other">@DataPoint.Link</a>
+            }
         </div>
-
-        @if (EditMode || AddMode)
-        {
-            <EditorCardDetail DataPoint="DataPoint" AddMode="AddMode" EditMode="EditMode" />
-        }
     </div>
+    <div class="card-row">
+        <div class="col-edit">@DataPoint.SuggestionCount</div>
+        <div class="col-stretch"><i>@DataPoint.Definition</i></div>
+    </div>
+
+    @if (EditMode || AddMode)
+    {
+        <EditorCardDetail DataPoint="DataPoint" AddMode="AddMode" EditMode="EditMode" />
+    }
+</div>
 
 
 @namespace SC.NewbLibrary.Pages.Components
 @using SC.NewbLibrary.Model.Data
 @using SC.NewbLibrary.Model.View
+@using SC.NewbLibrary.Service
+@inject NewbDataState NewbState
 @code {
     [Parameter]
     public NewbViewData DataPoint { get; set; }

@@ -12,8 +12,8 @@
         "EventLink": "https://en.wikipedia.org/wiki/After_action_report",
         "EventStamp": "2020-03-05T14:27:34.142",
         "EventUser": "Katherine Skysong",
-        "ReviewStamp": null,
-        "ReviewUser": null,
+        "ReviewStamp": "2020-03-05T19:04:21.876",
+        "ReviewUser": "A Dead Parrot",
         "IsApproved": true,
         "IsRejected": false
       },
@@ -36,8 +36,8 @@
         "EventLink": null,
         "EventStamp": "2020-02-05T14:27:34.142",
         "EventUser": "Katherine Skysong",
-        "ReviewStamp": null,
-        "ReviewUser": null,
+        "ReviewStamp": "2020-02-12T14:27:34.142",
+        "ReviewUser": "A Dead Parrot",
         "IsApproved": false,
         "IsRejected": true
       },
