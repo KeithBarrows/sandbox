@@ -20,5 +20,17 @@ namespace SC.NewbLibrary.Model.Data
 
         [JsonIgnore]
         public bool EventHasLink => !string.IsNullOrWhiteSpace(EventLink);
+        [JsonIgnore]
+        public string ApprovalText => IsApproved ? "Approved" : IsRejected ? "Rejected" : "In Review";
+        [JsonIgnore]
+        public string ClassApproval => IsApproved ? "text-approved" : IsRejected ? "text-rejected" : "text-review";
+        [JsonIgnore]
+        public string ClassTerm => EventTerm.IsEmpty() ? "text-old" : "text-new";
+        [JsonIgnore]
+        public string ClassTerse => EventTerse.IsEmpty() ? "text-old" : "text-new";
+        [JsonIgnore]
+        public string ClassLink => EventLink.IsEmpty() ? "text-old" : "text-new";
+        [JsonIgnore]
+        public string ClassDefinition => EventDefinition.IsEmpty() ? "text-old" : "text-new";
     }
 }

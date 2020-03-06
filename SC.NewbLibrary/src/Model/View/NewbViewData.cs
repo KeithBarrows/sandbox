@@ -7,7 +7,7 @@ namespace SC.NewbLibrary.Model.View
 {
     public class NewbViewData : NewbData
     {
-        public NewbViewData()
+        public void ReadEventSource()
         {
             if (EventHistory != null && EventHistory.Count() > 0)
             {
@@ -16,13 +16,13 @@ namespace SC.NewbLibrary.Model.View
                 var tmpLink = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventLink != null && a.IsApproved == true).EventLink;
                 var tmpTerse = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventTerse != null && a.IsApproved == true).EventTerse;
 
-                if (tmpTerm != null && !tmpTerm.Equals(Term, StringComparison.OrdinalIgnoreCase))
+                if (!tmpTerm.IsEqualTo(Term))
                     Term = tmpTerm;
-                if (tmpDefinition != null && !tmpDefinition.Equals(Definition, StringComparison.OrdinalIgnoreCase))
+                if (!tmpDefinition.IsEqualTo(Definition))
                     Definition = tmpDefinition;
-                if (tmpLink != null && !tmpLink.Equals(Link, StringComparison.OrdinalIgnoreCase))
+                if (!tmpLink.IsEqualTo(Link))
                     Link = tmpLink;
-                if (tmpTerse != null && !tmpTerse.Equals(Term, StringComparison.OrdinalIgnoreCase))
+                if (!tmpTerse.IsEqualTo(Terse))
                     Terse = tmpTerse;
             }
         }

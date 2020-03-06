@@ -1,4 +1,9 @@
-﻿.main-container {
+﻿body {
+    display: block;
+    margin: 0px;
+}
+
+.main-container {
     margin: 15px;
 }
 
@@ -11,9 +16,9 @@
     border-radius: 5px; /* 5px rounded corners */
 }
 
-.card-container:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
-}
+    .card-container:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+    }
 
 .card-row {
     display: flex;
@@ -32,13 +37,34 @@
     width: 155px;
 }
 
+.col-terse {
+    width: 300px;
+}
+
 .col-stretch {
-    flex-grow: 3;
+    flex-grow: 4;
 }
 
 .col-link {
-    flex-grow: 1;
-    /*text-align: right;*/
+    flex-grow: 3;
+    text-align: right;
+}
+
+.history {
+    display: flex;
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
+    font-size: 75%;
+    width: 100%;
+}
+
+.history-text {
+    display: flex;
+}
+
+.history-stamp {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .buttonSuggest {
@@ -54,3 +80,28 @@
         background-color: cornflowerblue;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
     }
+
+.text-old {
+    font-weight: 200;
+    font-style: italic;
+}
+
+.text-new {
+    font-weight: 400;
+}
+
+.text-approved {
+    background-color: lightgreen;
+    padding: 5px 5px;
+    margin: 5px 5px;
+}
+.text-rejected {
+    background-color: palevioletred;
+    padding: 5px 5px;
+    margin: 5px 5px;
+}
+.text-review {
+    background-color: palegoldenrod;
+    padding: 5px 5px;
+    margin: 5px 5px;
+}

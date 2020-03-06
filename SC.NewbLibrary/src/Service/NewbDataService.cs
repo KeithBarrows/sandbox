@@ -44,6 +44,7 @@ namespace SC.NewbLibrary.Service
                 Terse = a.Terse,
                 EventHistory = a.EventHistory
             }));
+            result.ForEach(a => a.ReadEventSource());
 
             return Task.FromResult(result.ToArray());
         }
