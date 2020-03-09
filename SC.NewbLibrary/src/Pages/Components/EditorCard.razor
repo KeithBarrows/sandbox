@@ -31,11 +31,9 @@
 @using SC.NewbLibrary.Service
 @inject NewbDataState NewbState
 @code {
+
     [Parameter]
     public NewbViewData DataPoint { get; set; }
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnClickCallback { get; set; }
-
     [Parameter]
     public bool EditMode { get; set; } = false;
     [Parameter]

@@ -2,26 +2,26 @@
 <EditForm Model="@DataEvent" OnValidSubmit="HandleValidSubmit">
     @if (AddMode)
     {
-        <div class="card-row">
-            <div class="col-edit"></div>
-            <div class="col-term">Term:</div>
-            <div class="col-stretch"><InputText id="eventTerm" bind="@DataEvent.EventTerm" placeholder="Term or acronym" /></div>
-        </div>
+    <div class="card-row">
+        <div class="col-edit"></div>
+        <div class="col-term">Term:</div>
+        <div class="col-stretch"><InputText id="eventTerm" @bind-Value="@EventTerm" placeholder="Term or acronym" /></div>
+    </div>
     }
     <div class="card-row">
         <div class="col-edit"></div>
         <div class="col-term">Terse</div>
-        <div class="col-stretch"><InputText id="eventTerse" bind="@DataEvent.EventTerse" placeholder="Short description" /></div>
+        <div class="col-stretch"><InputText id="eventTerse" @bind-Value="@EventTerse" placeholder="Short description" /></div>
     </div>
     <div class="card-row">
         <div class="col-edit"></div>
         <div class="col-term">Link:</div>
-        <div class="col-stretch"><InputText id="eventLink" bind="@DataEvent.EventLink" placeholder="Supporting resource link" /></div>
+        <div class="col-stretch"><InputText id="eventLink" @bind-Value="@EventLink" placeholder="Supporting resource link" /></div>
     </div>
     <div class=" card-row">
         <div class="col-edit"></div>
         <div class="col-term">Description:</div>
-        <div class="col-stretch"><InputText id="eventDefinition" bind="@DataEvent.EventDefinition" placeholder="Full definition" /></div>
+        <div class="col-stretch"><InputText id="eventDefinition" @bind-Value="@EventDefinition" placeholder="Full definition" /></div>
     </div>
     <div class=" card-row">
         <div class="col-edit"></div>
@@ -35,23 +35,22 @@
 
 @foreach (var eventData in DataPoint.EventHistory.OrderByDescending(a => a.EventStamp))
 {
-    <hr />
-    <div class="card-row">
-        <div class="history">
-            @*<div class="col-edit"></div>*@
-            <div class="history-text">
-                <div class="@eventData.ClassTerm @eventData.ClassApproval">@(eventData.EventTerm ?? @DataPoint.Term)</div>
-                <div class="@eventData.ClassTerse @eventData.ClassApproval">@(eventData.EventTerse ?? @DataPoint.Terse)</div>
-                <div class="@eventData.ClassDefinition @eventData.ClassApproval">@(eventData.EventDefinition ?? @DataPoint.Definition)</div>
-                <div class="@eventData.ClassLink @eventData.ClassApproval">@(eventData.EventLink ?? @DataPoint.Link)</div>
-            </div>
-            <div class="history-stamp">
-                <div class="@eventData.ClassApproval">@eventData.EventStamp</div>
-                <div class="@eventData.ClassApproval">@eventData.EventUser</div>
-                <div class="@eventData.ClassApproval">@eventData.ApprovalText</div>
-            </div>
+<hr />
+<div class="card-row">
+    <div class="history">
+        <div class="history-text">
+            <div class="@eventData.ClassTerm @eventData.ClassApproval">@(eventData.EventTerm ?? @DataPoint.Term)</div>
+            <div class="@eventData.ClassTerse @eventData.ClassApproval">@(eventData.EventTerse ?? @DataPoint.Terse)</div>
+            <div class="@eventData.ClassDefinition @eventData.ClassApproval">@(eventData.EventDefinition ?? @DataPoint.Definition)</div>
+            <div class="@eventData.ClassLink @eventData.ClassApproval">@(eventData.EventLink ?? @DataPoint.Link)</div>
+        </div>
+        <div class="history-stamp">
+            <div class="@eventData.ClassApproval">@eventData.EventStamp</div>
+            <div class="@eventData.ClassApproval">@eventData.EventUser</div>
+            <div class="@eventData.ClassApproval">@eventData.ApprovalText</div>
         </div>
     </div>
+</div>
 }
 
 
@@ -73,6 +72,10 @@
     public string SaveButtonText => AddMode ? "Add" : "Submit";
 
     private NewbDataEvent DataEvent { get; set; } = new NewbDataEvent();
+    private string EventTerm {get{ return DataEvent.EventTerm; }set{ DataEvent.EventTerm = value; }}
+    private string EventTerse {get{ return DataEvent.EventTerse; }set{ DataEvent.EventTerse = value; }}
+    private string EventDefinition {get{ return DataEvent.EventDefinition; }set{ DataEvent.EventDefinition = value; }}
+    private string EventLink {get{ return DataEvent.EventLink; }set{ DataEvent.EventLink = value; }}
 
     private void SetEditMode() => EditMode = !EditMode;
 
@@ -102,6 +105,7 @@
                 {
                     Term = DataEvent.EventTerm,
                 };
+                DataPoint.EventHistory.Add(DataEvent);
             }
 
             if (EditMode)
