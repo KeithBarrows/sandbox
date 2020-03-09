@@ -16,8 +16,8 @@ namespace SC.NewbLibrary.Model.View
         {
             get
             {
-                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true).EventDefinition;
-                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventDefinition != null && a.IsApproved == true).EventDefinition;
+                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true)?.EventDefinition ?? "";
+                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventDefinition != null && a.IsApproved == true)?.EventDefinition ?? "";
                 if (original.IsEqualTo(latest))
                     return original;
                 else
@@ -29,8 +29,8 @@ namespace SC.NewbLibrary.Model.View
         {
             get
             {
-                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true).EventTerse;
-                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventTerse != null && a.IsApproved == true).EventTerse;
+                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true)?.EventTerse ?? "";
+                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventTerse != null && a.IsApproved == true)?.EventTerse ?? "";
                 if (original.IsEqualTo(latest))
                     return original;
                 else
@@ -42,8 +42,8 @@ namespace SC.NewbLibrary.Model.View
         {
             get
             {
-                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true).EventLink;
-                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventLink != null && a.IsApproved == true).EventLink;
+                var original = EventHistory.OrderBy(a => a.ReviewStamp).FirstOrDefault(a => a.IsApproved == true)?.EventLink ?? "";
+                var latest = EventHistory.OrderByDescending(a => a.ReviewStamp).FirstOrDefault(a => a.EventLink != null && a.IsApproved == true)?.EventLink ?? "";
                 if (original.IsEqualTo(latest))
                     return original;
                 else
@@ -69,6 +69,13 @@ namespace SC.NewbLibrary.Model.View
                     EventHistory = this.EventHistory,
                 };
             }
+        }
+
+        private void EventHistoryRunner()
+        {
+            if (EventHistory.Count <= 0) { }
+            if (EventHistory.Count == 1 || (EventHistory.Count >= 1 && EventHistory.All(a => !a.IsApproved && !a.IsRejected))) { }
+            else { }
         }
     }
 }

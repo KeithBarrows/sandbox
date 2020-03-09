@@ -3,6 +3,14 @@
     margin: 0px;
 }
 
+ul.nav {
+    list-style-type: none;
+}
+
+li.nav-link {
+    list-style-type: none;
+}
+
 .main-container {
     margin: 15px;
 }

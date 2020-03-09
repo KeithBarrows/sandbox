@@ -7,22 +7,18 @@
 
 
 @page "/editor"
-@using SC.NewbLibrary.Model.View
-@using SC.NewbLibrary.Service
-@using SC.NewbLibrary.Pages.Components
-@inject NewbDataService NewbService
-@inject NewbDataState NewbState
 
 
 <h1>NEWB (New Eden Word Bank) <button class="buttonSuggest" @onclick="SetAddMode"><img src="/images/suggest.png" height="32" alt="Suggest an new term" /> Suggest a new term</button></h1>
 <p><i><a href="https://chrome.google.com/webstore/detail/new-eden-word-bank-newb/maaojdhplffpbflhoggcckalfhhigjan" target="_blank">Add the Chrome Extension</a></i></p>
-<button @onclick="FilterAction">All</button>
-@for (var txt = (int)'A'; txt <= (int)'Z'; txt++)
+
+@for (var index = (int)'A'; index <= (int)'Z'; index++)
 {
-    <button onclick="FilterAction">@((char)txt)</button>
+    var letter = (char)index;
+    <button @onclick="(() => { FilterAction(letter); })">@letter</button>
 }
 
-@if (newbData == null)
+@if (NewbState.NewbData == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -31,34 +27,42 @@ else
     <div class="main-container">
         @if (AddMode)
         {
-            <EditorCardDetail DataPoint="@DataPoint" AddMode="true" />
+            <EditorCardDetail DataPoint="@NewbState.EmptyDataPoint" AddMode="true" />
         }
-        @foreach (var dataPoint in newbData.Where(a => a.Term.StartsWith(SearchLetter, StringComparison.OrdinalIgnoreCase)))
+        @foreach (var dataPoint in NewbState.FilteredData)
         {
-            <EditorCard DataPoint="dataPoint" />
+            <EditorCard DataPoint="@dataPoint" />
         }
     </div>
 }
 
 
+@using SC.NewbLibrary.Model.View
+@using SC.NewbLibrary.Service
+@using SC.NewbLibrary.Pages.Components
+@inject NewbDataService NewbService
+@inject NewbDataState NewbState
+@implements IDisposable
 
 @code {
-    private NewbViewData[] newbData;
-    private string SearchLetter { get; set; } = "A";
-    //private string All = "All";
-
     protected override async Task OnInitializedAsync()
     {
-        newbData = await NewbService.GetNewbData();
+        //await Task.Run();
+        //NewbState = new NewbDataState();
+        NewbState.OnFilterRequested += StateHasChanged;
+        NewbState.OnDataAdded += StateHasChanged;
+        NewbState.OnDataUpdated += StateHasChanged;
+    }
+    public void Dispose()
+    {
+        NewbState.OnFilterRequested -= StateHasChanged;
+        NewbState.OnDataAdded -= StateHasChanged;
+        NewbState.OnDataUpdated -= StateHasChanged;
     }
 
-    public NewbViewData DataPoint { get; set; } = new NewbViewData();
     public bool AddMode { get; set; } = false;
 
     private void SetAddMode() => AddMode = !AddMode;
 
-    private void FilterAction()
-    {
-
-    }
+    void FilterAction(char filterText) => NewbState.SetFilter(filterText.ToString());
 }

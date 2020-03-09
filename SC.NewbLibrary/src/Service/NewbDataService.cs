@@ -11,7 +11,7 @@ namespace SC.NewbLibrary.Service
 {
     public class NewbDataService
     {
-        public Task<NewbViewData[]> GetNewbData()
+        public Task<List<NewbViewData>> GetNewbData()
         {
             // https://stackoverflow.com/questions/52279980/blazor-read-directory
 
@@ -42,7 +42,7 @@ namespace SC.NewbLibrary.Service
                 EventHistory = a.EventHistory
             }));
 
-            return Task.FromResult(result.ToArray());
+            return Task.FromResult(result);
         }
     }
 }
