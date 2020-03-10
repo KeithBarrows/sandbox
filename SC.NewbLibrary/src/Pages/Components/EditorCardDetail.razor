@@ -1,12 +1,12 @@
 ﻿
 <EditForm Model="@DataEvent" OnValidSubmit="HandleValidSubmit">
-    @if (AddMode)
+    @if (NewbState.AddMode)
     {
-    <div class="card-row">
-        <div class="col-edit"></div>
-        <div class="col-term">Term:</div>
-        <div class="col-stretch"><InputText id="eventTerm" @bind-Value="@EventTerm" placeholder="Term or acronym" /></div>
-    </div>
+        <div class="card-row">
+            <div class="col-edit"></div>
+            <div class="col-term">Term:</div>
+            <div class="col-stretch"><InputText id="eventTerm" @bind-Value="@EventTerm" placeholder="Term or acronym" /></div>
+        </div>
     }
     <div class="card-row">
         <div class="col-edit"></div>
@@ -35,22 +35,22 @@
 
 @foreach (var eventData in DataPoint.EventHistory.OrderByDescending(a => a.EventStamp))
 {
-<hr />
-<div class="card-row">
-    <div class="history">
-        <div class="history-text">
-            <div class="@eventData.ClassTerm @eventData.ClassApproval">@(eventData.EventTerm ?? @DataPoint.Term)</div>
-            <div class="@eventData.ClassTerse @eventData.ClassApproval">@(eventData.EventTerse ?? @DataPoint.Terse)</div>
-            <div class="@eventData.ClassDefinition @eventData.ClassApproval">@(eventData.EventDefinition ?? @DataPoint.Definition)</div>
-            <div class="@eventData.ClassLink @eventData.ClassApproval">@(eventData.EventLink ?? @DataPoint.Link)</div>
-        </div>
-        <div class="history-stamp">
-            <div class="@eventData.ClassApproval">@eventData.EventStamp</div>
-            <div class="@eventData.ClassApproval">@eventData.EventUser</div>
-            <div class="@eventData.ClassApproval">@eventData.ApprovalText</div>
+    <hr />
+    <div class="card-row">
+        <div class="history">
+            <div class="history-text">
+                <div class="@eventData.ClassTerm @eventData.ClassApproval">@(eventData.EventTerm ?? @DataPoint.Term)</div>
+                <div class="@eventData.ClassTerse @eventData.ClassApproval">@(eventData.EventTerse ?? @DataPoint.Terse)</div>
+                <div class="@eventData.ClassDefinition @eventData.ClassApproval">@(eventData.EventDefinition ?? @DataPoint.Definition)</div>
+                <div class="@eventData.ClassLink @eventData.ClassApproval">@(eventData.EventLink ?? @DataPoint.Link)</div>
+            </div>
+            <div class="history-stamp">
+                <div class="@eventData.ClassApproval">@eventData.EventStamp</div>
+                <div class="@eventData.ClassApproval">@eventData.EventUser</div>
+                <div class="@eventData.ClassApproval">@eventData.ApprovalText</div>
+            </div>
         </div>
     </div>
-</div>
 }
 
 
@@ -62,60 +62,25 @@
 @code {
     [Parameter]
     public NewbViewData DataPoint { get; set; }
-    [Parameter]
-    public EventCallback<NewbEventDataArgs> OnSaveCallback { get; set; }
-    [Parameter]
-    public bool EditMode { get; set; } = false;
-    [Parameter]
-    public bool AddMode { get; set; } = false;
 
-    public string SaveButtonText => AddMode ? "Add" : "Submit";
+    public string SaveButtonText => NewbState.AddMode ? "Add" : "Submit";
 
     private NewbDataEvent DataEvent { get; set; } = new NewbDataEvent();
-    private string EventTerm {get{ return DataEvent.EventTerm; }set{ DataEvent.EventTerm = value; }}
-    private string EventTerse {get{ return DataEvent.EventTerse; }set{ DataEvent.EventTerse = value; }}
-    private string EventDefinition {get{ return DataEvent.EventDefinition; }set{ DataEvent.EventDefinition = value; }}
-    private string EventLink {get{ return DataEvent.EventLink; }set{ DataEvent.EventLink = value; }}
-
-    private void SetEditMode() => EditMode = !EditMode;
+    private string EventTerm { get { return DataEvent.EventTerm; } set { DataEvent.EventTerm = value; } }
+    private string EventTerse { get { return DataEvent.EventTerse; } set { DataEvent.EventTerse = value; } }
+    private string EventDefinition { get { return DataEvent.EventDefinition; } set { DataEvent.EventDefinition = value; } }
+    private string EventLink { get { return DataEvent.EventLink; } set { DataEvent.EventLink = value; } }
 
     private void CancelAction()
     {
-        EditMode = false;
-        AddMode = false;
         DataPoint = new NewbViewData();
         DataEvent = new NewbDataEvent();
-
-        // https://softchris.github.io/pages/dotnet-blazor.html#learn-how-to-build-your-first-blazor-webassembly-app-in-net-core-3-0
-        // https://visualstudiomagazine.com/articles/2018/10/01/blazor-event-handling.aspx
-        var eventArgs = new NewbEventDataArgs { AddMode = AddMode, EditMode = EditMode };
-
+        if(NewbState.AddMode)
+            NewbState.DismissAddMode();
     }
 
     private void HandleValidSubmit()
     {
-        if (!string.IsNullOrWhiteSpace(DataEvent.EventDefinition) ||
-            !string.IsNullOrWhiteSpace(DataEvent.EventLink) ||
-            !string.IsNullOrWhiteSpace(DataEvent.EventTerm) ||
-            !string.IsNullOrWhiteSpace(DataEvent.EventTerse))
-        {
-            if (AddMode)
-            {
-                DataPoint = new NewbViewData
-                {
-                    Term = DataEvent.EventTerm,
-                };
-                DataPoint.EventHistory.Add(DataEvent);
-            }
-
-            if (EditMode)
-            {
-                DataEvent.EventStamp = DateTime.UtcNow;
-                DataEvent.EventUser = "Anonymous";       // TODO:  Need the EVE ESI Login Integration piece!
-                DataPoint.EventHistory.Add(DataEvent);
-            }
-        }
-        EditMode = false;
-        AddMode = false;
+        NewbState.SaveData(DataEvent, DataPoint);
     }
 }
