@@ -71,6 +71,18 @@ namespace SC.NewbLibrary.Model.View
             }
         }
 
+        public bool EditMode { get; private set; } = false;
+        public void ToggleEditMode()
+        {
+            EditMode = !EditMode;
+        }
+        public void DismissEditMode()
+        {
+            EditMode = false;
+        }
+
+
+
         private void EventHistoryRunner()
         {
             if (EventHistory.Count <= 0) { }
