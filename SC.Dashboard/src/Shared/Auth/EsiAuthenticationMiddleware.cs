@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace SC.Dashboard.Shared.Auth
 {
-    public class Sol3AuthenticationMiddleware
+    public class EsiAuthenticationMiddleware
     {
         public static void SetOAuth2Options(OAuthOptions options, IConfiguration configuration)
         {

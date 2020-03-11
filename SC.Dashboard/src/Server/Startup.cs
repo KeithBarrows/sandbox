@@ -42,7 +42,7 @@ namespace SC.Dashboard.Server
 
             services.AddAuthentication()
                 .AddIdentityServerJwt()
-                .AddOAuth("EveOnline", "Eve Online", options => Sol3AuthenticationMiddleware.SetOAuth2Options(options, Configuration));
+                .AddOAuth("EveOnline", "Eve Online", options => EsiAuthenticationMiddleware.SetOAuth2Options(options, Configuration));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
