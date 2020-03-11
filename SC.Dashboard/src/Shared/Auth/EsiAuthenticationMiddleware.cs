@@ -9,6 +9,12 @@ using Microsoft.AspNetCore.Http;
 using SC.Dashboard.Shared.Config;
 using Microsoft.Extensions.Configuration;
 
+/*********************************************************************************************************************
+ * https://docs.microsoft.com/en-us/aspnet/core/security/blazor/webassembly/?view=aspnetcore-3.1                     *
+ * https://docs.microsoft.com/en-us/aspnet/core/security/blazor/webassembly/additional-scenarios?view=aspnetcore-3.1 *
+ ********************************************************************************************************************/
+
+
 namespace SC.Dashboard.Shared.Auth
 {
     public class EsiAuthenticationMiddleware
@@ -18,8 +24,8 @@ namespace SC.Dashboard.Shared.Auth
             var config = new EveAuth(configuration);
 
             // TODO:  Move to azure safe...
-            options.ClientId = "xxxxxxxxxxxxxxxxxx";
-            options.ClientSecret = "xxxxxxxxxxxxxxxxxx";
+            options.ClientId = "da968792109f42afb459efd51a0655c4";
+            options.ClientSecret = "vbrchRcfef3ttXPK0RLjTTlwKDfiuy6s68TZm9Z2";
 
             options.AuthorizationEndpoint = config.AuthorizationEndpoint;
             options.TokenEndpoint = config.TokenEndpoint;
@@ -27,18 +33,14 @@ namespace SC.Dashboard.Shared.Auth
             options.CallbackPath = new PathString(config.CallbackPath);
 
             // Set the scopes you want to request
-            var scopes = config.Scopes;
-            var scopeList = scopes.Split(' ');
+            var scopeList = config.Scopes.Split(' ');
             foreach(var scope in scopeList)
                 options.Scope.Add(scope);
-
-            //options.Scope.Add("user-read");
-            //options.Scope.Add("user-write");
 
             // Define how to map returned user data to claims
             options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
             options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
-            options.ClaimActions.MapJsonKey(ClaimTypes.Email, "EmailAddress", ClaimValueTypes.Email);  // TODO: does this exist?
+            //options.ClaimActions.MapJsonKey(ClaimTypes.Email, "EmailAddress", ClaimValueTypes.Email);  // TODO: does this exist?
 
             // Register to events
             options.Events = new OAuthEvents
@@ -49,9 +51,6 @@ namespace SC.Dashboard.Shared.Auth
                     // Create the request message to get user data via the backchannel
                     var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
-
-                    //// Additional header if needed. Here's an example to go through Azure API Management 
-                    //request.Headers.Add("Ocp-Apim-Subscription-Key", "<given key>");
 
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
