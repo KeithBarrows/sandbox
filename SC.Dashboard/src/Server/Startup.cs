@@ -41,8 +41,8 @@ namespace SC.Dashboard.Server
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddAuthentication()
-                .AddIdentityServerJwt()
-                .AddOAuth("EveOnline", "Eve Online", options => EsiAuthenticationMiddleware.SetOAuth2Options(options, Configuration));
+                .AddIdentityServerJwt();
+                //.AddOAuth("EveOnline", "Eve Online", options => EsiAuthenticationMiddleware.SetOAuth2Options(options, Configuration));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
