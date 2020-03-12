@@ -19,7 +19,12 @@ namespace SC.Dashboard.Shared.Auth
 {
     public class EsiAuthenticationMiddleware
     {
-        public static void SetOAuth2Options(OAuthOptions options, IConfiguration configuration)
+        public static void SetOidcOptions(RemoteAuthenticationOptions options, IConfigurationRoot configuration)
+        {
+            var config = new EveAuth(configuration);
+        }
+
+        public static void SetOAuth2Options(OAuthOptions options, IConfigurationRoot configuration)
         {
             var config = new EveAuth(configuration);
 
