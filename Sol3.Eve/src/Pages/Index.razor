@@ -18,9 +18,31 @@ Welcome to your new app.
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
 
-    private async Task LogUsername()
+    //private async Task LogUsername()
+    //{
+    //    try
+    //    {
+    //        var authState = await authenticationStateTask;
+    //        var user = authState.User;
+
+    //        if (user.Identity.IsAuthenticated)
+    //        {
+    //            Console.WriteLine($"{user.Identity.Name} is authenticated.");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("The user is NOT authenticated.");
+    //        }
+    //    }
+    //    catch(Exception ex)
+    //    {
+
+    //    }
+    //}
+
+    private void LogUsername()
     {
-        var authState = await authenticationStateTask;
+        var authState = Task.Run(() => AuthenticationStateProvider.GetAuthenticationStateAsync()).Result;
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
@@ -32,19 +54,4 @@ Welcome to your new app.
             Console.WriteLine("The user is NOT authenticated.");
         }
     }
-
-    //private async Task LogUsername()
-    //{
-    //    var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    //    var user = authState.User;
-
-    //    if (user.Identity.IsAuthenticated)
-    //    {
-    //        Console.WriteLine($"{user.Identity.Name} is authenticated.");
-    //    }
-    //    else
-    //    {
-    //        Console.WriteLine("The user is NOT authenticated.");
-    //    }
-    //}
 }
