@@ -14,7 +14,7 @@ namespace Sol3.Eve
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-
+            //
             //builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
             builder.RootComponents.Add<App>("app");
@@ -29,7 +29,12 @@ namespace Sol3.Eve
                 // For more information, see https://aka.ms/blazor-standalone-auth
 
                 options.ProviderOptions.Authority = "https://dev-712283.okta.com";
-                options.ProviderOptions.ClientId = "0oa2yttq55XjCR3AO357";
+                options.ProviderOptions.ClientId = "0oa36our0hMpuyVAB357";  // "0oa2yttq55XjCR3AO357";
+                options.ProviderOptions.ResponseType = "code";
+                //options.ProviderOptions.DefaultScopes.Add("api");
+                //options.ProviderOptions.DefaultScopes.Add("openid");
+                //options.ProviderOptions.DefaultScopes.Add("profile");
+                //options.ProviderOptions.DefaultScopes.Add("email");
 
                 options.AuthenticationPaths.LogInCallbackPath = "https://localhost:5001/authentication/login-callback";
                 options.AuthenticationPaths.LogInFailedPath = "https://localhost:5001/authentication/login-failed";
