@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Components.Authorization;
 using Sol3.Eve.Services;
+using Sol3.Infrastructure.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Sol3.Eve
 {
@@ -13,11 +15,16 @@ namespace Sol3.Eve
     {
         public static async Task Main(string[] args)
         {
+            var logger = SerilogSetup.Setup("Sol3.Eve");
+            logger.Information("Initialize application");
+
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             //
             //builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
             builder.RootComponents.Add<App>("app");
+
+            //TODO: --> builder.Services.AddSingleton<ILogger>(logger);
 
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
