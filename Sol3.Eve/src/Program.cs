@@ -28,8 +28,26 @@ namespace Sol3.Eve
                 // Configure your authentication provider options here.
                 // For more information, see https://aka.ms/blazor-standalone-auth
 
-                options.ProviderOptions.Authority = "https://dev-712283.okta.com";
-                options.ProviderOptions.ClientId = "0oa36our0hMpuyVAB357";  // "0oa2yttq55XjCR3AO357";
+                // EVE ONLINE //
+                options.ProviderOptions.Authority = "https://login.eveonline.com"; // /oauth/authorize";
+                options.ProviderOptions.ClientId = "da968792109f42afb459efd51a0655c4";
+                if (options.ProviderOptions.DefaultScopes.Count > 0)
+                {
+                    options.ProviderOptions.DefaultScopes.Remove("openid");
+                    options.ProviderOptions.DefaultScopes.Remove("profile");
+                    //options.ProviderOptions.DefaultScopes.Remove("email");
+                }
+
+                var scopeList = "publicData esi-calendar.respond_calendar_events.v1 esi-calendar.read_calendar_events.v1 esi-location.read_location.v1 esi-location.read_ship_type.v1 esi-mail.organize_mail.v1 esi-mail.read_mail.v1 esi-mail.send_mail.v1 esi-skills.read_skills.v1 esi-skills.read_skillqueue.v1 esi-wallet.read_character_wallet.v1 esi-clones.read_clones.v1 esi-characters.read_contacts.v1 esi-bookmarks.read_character_bookmarks.v1 esi-killmails.read_killmails.v1 esi-corporations.read_corporation_membership.v1 esi-assets.read_assets.v1 esi-characters.write_contacts.v1 esi-fittings.read_fittings.v1 esi-corporations.read_structures.v1 esi-characters.read_loyalty.v1 esi-characters.read_medals.v1 esi-characters.read_standings.v1 esi-characters.read_corporation_roles.v1 esi-location.read_online.v1 esi-clones.read_implants.v1 esi-characters.read_fatigue.v1 esi-killmails.read_corporation_killmails.v1 esi-corporations.track_members.v1 esi-corporations.read_divisions.v1 esi-corporations.read_contacts.v1 esi-corporations.read_titles.v1 esi-corporations.read_facilities.v1 esi-alliances.read_contacts.v1 esi-characterstats.read.v1".Split(' ');
+                foreach (var scope in scopeList)
+                    options.ProviderOptions.DefaultScopes.Add(scope);
+
+
+
+                // OKTA //
+                //options.ProviderOptions.Authority = "https://dev-712283.okta.com";
+                //options.ProviderOptions.ClientId = "0oa36our0hMpuyVAB357";  // "0oa2yttq55XjCR3AO357";
+
                 options.ProviderOptions.ResponseType = "code";
                 //options.ProviderOptions.DefaultScopes.Add("api");
                 //options.ProviderOptions.DefaultScopes.Add("openid");
