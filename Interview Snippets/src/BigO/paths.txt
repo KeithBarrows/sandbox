@@ -1,0 +1,10 @@
+/find/friends/friends
+/abc/lists
+/
+/find
+/find/friends
+/find/123
+/find/123/friends
+/find/123/friends/zzz
+/settings
+/aaa/bbb
