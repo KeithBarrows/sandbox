@@ -14,66 +14,52 @@ namespace Sol3.Infrastructure.Logging
 {
     public static class SerilogSetup
     {
+        /// <summary>
+        /// Setup Serilog.
+        /// </summary>
+        /// <param name="appName">Required: The application name.</param>
+        /// <returns>The fully configured Serilog ILogger</returns>
         public static Serilog.ILogger Setup(string appName)
         {
-            AppConfiguration = ConfigurationManager.InitializeConfiguration();
-
-            if (CanSelfLog)
-            {
-                var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "Logs", $"{appName}_{environmentName}_SelfLog.log");
-                var file = File.CreateText(path);
-                Serilog.Debugging.SelfLog.Enable(TextWriter.Synchronized(file));
-                Serilog.Debugging.SelfLog.WriteLine("Setting up Serilog");
-            }
-
-            var loggerConfiguration = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .MinimumLevel.Override("Microsoft", AppConfiguration["Serilog:Overrides:Microsoft"].LogLevel(LogEventLevel.Information))
-                .MinimumLevel.Override("System", AppConfiguration["Serilog:Overrides:System"].LogLevel(LogEventLevel.Information))
-                .Enrich.FromLogContext()
-                .Enrich.WithProperty("Application", appName)
-                .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
-
-            return InternalSetup(loggerConfiguration, appName);
+            _appName = appName;
+            SetupSelfLog();
+            return InstantiateLogger();
         }
 
+        /// <summary>
+        /// Setup Serilog and include enrichment properties.
+        /// </summary>
+        /// <param name="enrichWithProperties">A dictionary of enrichment properties.  One must have the key="appName".</param>
+        /// <returns>The fully configured Serilog ILogger</returns>
         public static Serilog.ILogger Setup(IDictionary<string,string> enrichWithProperties)
         {
-            AppConfiguration = ConfigurationManager.InitializeConfiguration();
-
-            var appName = "UNKNOWN APP.  PASS [appName] IN PROGRAM.CS.";
+            _appName = "UNKNOWN APP.  PASS [appName] IN PROGRAM.CS.";
             if (enrichWithProperties.ContainsKey("appName"))
-                appName = enrichWithProperties.FirstOrDefault(kvp => kvp.Key.Equals("appName", StringComparison.InvariantCultureIgnoreCase)).Value;
+                _appName = enrichWithProperties.FirstOrDefault(kvp => kvp.Key.Equals("appName", StringComparison.InvariantCultureIgnoreCase)).Value;
 
+            SetupSelfLog();
+            LoggerConfiguration = enrichWithProperties.Aggregate(LoggerConfiguration, (current, kvp) => current.Enrich.WithProperty(kvp.Key, kvp.Value));
+            return InstantiateLogger();
+        }
+
+        private static void SetupSelfLog()
+        {
             if (CanSelfLog)
             {
                 var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "Logs", $"{appName}_{environmentName}_SelfLog.log");
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "Logs", $"{_appName}_{environmentName}_SelfLog.log");
                 var file = File.CreateText(path);
                 Serilog.Debugging.SelfLog.Enable(TextWriter.Synchronized(file));
                 Serilog.Debugging.SelfLog.WriteLine("Setting up Serilog");
             }
-
-            var loggerConfiguration = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .MinimumLevel.Override("Microsoft", AppConfiguration["Serilog:Overrides:Microsoft"].LogLevel(LogEventLevel.Information))
-                .MinimumLevel.Override("System", AppConfiguration["Serilog:Overrides:System"].LogLevel(LogEventLevel.Information))
-                .Enrich.FromLogContext()
-                .Enrich.WithProperty("Application", appName)
-                .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
-
-            loggerConfiguration = enrichWithProperties.Aggregate(loggerConfiguration, (current, kvp) => current.Enrich.WithProperty(kvp.Key, kvp.Value));
-
-            return InternalSetup(loggerConfiguration, appName);
         }
 
-        private static Serilog.ILogger InternalSetup(LoggerConfiguration loggerConfiguration, string appName)
+        private static Serilog.ILogger InstantiateLogger()
         {
             if (IsActiveSeq)
             {
                 var url = AppConfiguration["Serilog:Seq:Url"];
-                loggerConfiguration = loggerConfiguration.WriteTo.Seq(url, RestrictedToMinimumLevelSeq);
+                LoggerConfiguration = LoggerConfiguration.WriteTo.Seq(url, RestrictedToMinimumLevelSeq);
 
                 if (CanSelfLog)
                     Serilog.Debugging.SelfLog.WriteLine("Adding SEQ Sink, url={0}, RestrictedToMinimumLevel={1}", url, RestrictedToMinimumLevelSeq);
@@ -81,7 +67,7 @@ namespace Sol3.Infrastructure.Logging
 
             if (IsActiveConsole)
             {
-                loggerConfiguration = loggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Literate, restrictedToMinimumLevel: RestrictedToMinimumLevelConsole);
+                LoggerConfiguration = LoggerConfiguration.WriteTo.Console(theme: AnsiConsoleTheme.Literate, restrictedToMinimumLevel: RestrictedToMinimumLevelConsole);
 
                 if (CanSelfLog)
                     Serilog.Debugging.SelfLog.WriteLine("Adding Console Sink, RestrictedToMinimumLevel={0}", RestrictedToMinimumLevelConsole);
@@ -92,7 +78,7 @@ namespace Sol3.Infrastructure.Logging
                 var connString = AppConfiguration["Serilog:MSSQL:ConnectionString"];
                 var tableName = AppConfiguration["Serilog:MSSQL:TableName"];
                 var autoCreateTable = AppConfiguration["Serilog:MSSQL:autoCreateSqlTable"].ToBool(false);
-                loggerConfiguration = loggerConfiguration.WriteTo.MSSqlServer(connectionString: connString
+                LoggerConfiguration = LoggerConfiguration.WriteTo.MSSqlServer(connectionString: connString
                     , tableName: tableName
                     , restrictedToMinimumLevel: RestrictedToMinimumLevelMsSql
                     , autoCreateSqlTable: autoCreateTable);
@@ -107,18 +93,42 @@ namespace Sol3.Infrastructure.Logging
             if (IsActiveFile)
             {
                 var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "Logs", $"{appName.Replace(" ", "_")}_{environmentName}");
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "Logs", $"{_appName.Replace(" ", "_")}_{environmentName}");
                 var logFile = path + "_{Date}.log";
-                loggerConfiguration = loggerConfiguration.WriteTo.RollingFile(new JsonFormatter(), logFile, RestrictedToMinimumLevelFile);
+                LoggerConfiguration = LoggerConfiguration.WriteTo.RollingFile(new JsonFormatter(), logFile, RestrictedToMinimumLevelFile);
 
                 if (CanSelfLog)
                     Serilog.Debugging.SelfLog.WriteLine("Adding RollingFile Sink, LogFile={0}, RestrictedToMinimumLevel={1}", logFile, RestrictedToMinimumLevelConsole);
             }
 
-            return loggerConfiguration.CreateLogger();
+            return LoggerConfiguration.CreateLogger();
         }
 
-        private static IConfigurationRoot AppConfiguration { get; set; }
+        private static string _appName;
+        private static LoggerConfiguration _loggerConfiguration;
+        private static LoggerConfiguration LoggerConfiguration
+        {
+            get
+            {
+                if (_loggerConfiguration == null)
+                {
+                    _loggerConfiguration = new LoggerConfiguration()
+                                    .MinimumLevel.Verbose()
+                                    .MinimumLevel.Override("Microsoft", AppConfiguration["Serilog:Overrides:Microsoft"].LogLevel(LogEventLevel.Information))
+                                    .MinimumLevel.Override("System", AppConfiguration["Serilog:Overrides:System"].LogLevel(LogEventLevel.Information))
+                                    .Enrich.FromLogContext()
+                                    .Enrich.WithProperty("Application", _appName)
+                                    .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+                }
+                return _loggerConfiguration;
+            }
+            set
+            {
+                _loggerConfiguration = value;
+            }
+        }
+
+        private static IConfigurationRoot AppConfiguration => ConfigurationManager.InitializeConfiguration();
         private static bool IsActiveSeq => AppConfiguration["Serilog:Seq:IsActive"].ToBool(false) && AppConfiguration["Serilog:Seq:Url"].Length > 0;
         private static bool IsActiveConsole => AppConfiguration["Serilog:Console:IsActive"].ToBool(false);
         private static bool IsActiveMsSql => AppConfiguration["Serilog:MSSQL:IsActive"].ToBool(false) && AppConfiguration["Serilog:MSSQL:ConnectionString"].Length > 0 && AppConfiguration["Serilog:MSSQL:TableName"].Length > 0;
@@ -152,13 +162,17 @@ namespace Sol3.Infrastructure.Logging
                 case "WARN":
                 case "WARNING":
                     return LogEventLevel.Warning;
-                default:
+                case "INFO":
+                case "INFORMATION":
                     return LogEventLevel.Information;
+                case "DBG":
                 case "DEBUG":
                     return LogEventLevel.Debug;
                 case "VERBOSE":
                 case "TRACE":
                     return LogEventLevel.Verbose;
+                default:
+                    return defaultEventLevel;
             }
         }
     }
