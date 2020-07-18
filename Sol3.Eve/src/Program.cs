@@ -15,8 +15,8 @@ namespace Sol3.Eve
     {
         public static async Task Main(string[] args)
         {
-            var logger = SerilogSetup.Setup("Sol3.Eve");
-            logger.Information("Initialize application");
+            //var logger = SerilogSetup.Setup("Sol3.Eve");
+            //logger.Information("Initialize application");
 
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             //
