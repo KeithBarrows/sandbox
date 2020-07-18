@@ -1,0 +1,13 @@
+@page "/authentication/{action}"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+<RemoteAuthenticatorView Action="@Action">
+    <CompletingLoggingIn>
+        Synchronizing Eve Login with this support app.  Please wait...
+    </CompletingLoggingIn>
+</RemoteAuthenticatorView>
+
+@code{
+    [Parameter]
+    public string Action { get; set; }
+}

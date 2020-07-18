@@ -18,9 +18,9 @@
         <div class="col-stretch"><i>@DataPoint.Definition</i></div>
     </div>
 
-    @if (EditMode || AddMode)
+    @if (DataPoint.EditMode)
     {
-        <EditorCardDetail DataPoint="DataPoint" AddMode="AddMode" EditMode="EditMode" />
+        <EditorCardDetail DataPoint="DataPoint" />
     }
 </div>
 
@@ -34,12 +34,12 @@
 
     [Parameter]
     public NewbViewData DataPoint { get; set; }
-    [Parameter]
-    public bool EditMode { get; set; } = false;
-    [Parameter]
-    public bool AddMode { get; set; } = false;
 
     private NewbDataEvent DataEvent { get; set; } = new NewbDataEvent();
 
-    private void SetEditMode() => EditMode = !EditMode;
+    private void SetEditMode()
+    {
+        DataPoint.ToggleEditMode();
+        NewbState.RaiseStateChangedEvent();  // this raises the internal event...
+    }
 }

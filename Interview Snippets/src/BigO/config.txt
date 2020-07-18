@@ -1,0 +1,20 @@
+/ rootEndpoint
+/find findRootEndpoint
+/find/friends findFriendsEndpoint
+/find/lists findListsEndpoint
+/find/X findEndpoint
+/find/X/friends findFriendsEndpoint
+/find/X/lists findListsEndpoint
+/find/X/lists/X findListIdEndpoint
+/X/friends findFriendsEndpoint
+/X/lists findListsEndpoint
+/settings settingsEndpoint
+
+Niece Waidhofer
+Ayla Woodruff
+Whitney Cowart
+Danielle Beaulieu
+Lucy Pinder
+Harli Lotts
+
+Natalia Zardon
