@@ -3,11 +3,13 @@
 @* Includes AJAX calls to a web API                                                                                   *@
 @* https://docs.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-3.1 - MS Overview               *@
 @* https://blazor.radzen.com/ - 3rd party controls (components)                                                       *@
+@* https://chrissainty.com/3-ways-to-communicate-between-components-in-blazor/                                        *@
+@* https://softchris.github.io/pages/dotnet-blazor.html#learn-how-to-build-your-first-blazor-webassembly-app-in-net-core-3-0 *@
+@* https://visualstudiomagazine.com/articles/2018/10/01/blazor-event-handling.aspx                                    *@
 @*--------------------------------------------------------------------------------------------------------------------*@
 
 
 @page "/editor"
-
 
 <h1>NEWB (New Eden Word Bank) <button class="buttonSuggest" @onclick="SetAddMode"><img src="/images/suggest.png" height="32" alt="Suggest an new term" /> Suggest a new term</button></h1>
 <p><i><a href="https://chrome.google.com/webstore/detail/new-eden-word-bank-newb/maaojdhplffpbflhoggcckalfhhigjan" target="_blank">Add the Chrome Extension</a></i></p>
@@ -25,9 +27,9 @@
 else
 {
     <div class="main-container">
-        @if (AddMode)
+        @if (NewbState.AddMode)
         {
-            <EditorCardDetail DataPoint="@NewbState.EmptyDataPoint" AddMode="true" />
+            <EditorCardDetail DataPoint="@NewbState.EmptyDataPoint" />
         }
         @foreach (var dataPoint in NewbState.FilteredData)
         {
@@ -36,8 +38,6 @@ else
     </div>
 }
 
-
-@using SC.NewbLibrary.Model.View
 @using SC.NewbLibrary.Service
 @using SC.NewbLibrary.Pages.Components
 @inject NewbDataService NewbService
@@ -49,20 +49,23 @@ else
     {
         //await Task.Run();
         //NewbState = new NewbDataState();
-        NewbState.OnFilterRequested += StateHasChanged;
-        NewbState.OnDataAdded += StateHasChanged;
-        NewbState.OnDataUpdated += StateHasChanged;
+        NewbState.OnStateChanged += StateHasChanged;
+        //NewbState.OnAddModeChanged += StateHasChanged;
+        //NewbState.OnEditModeChanged += StateHasChanged;
+        //NewbState.OnFilterRequested += StateHasChanged;
+        //NewbState.OnDataAdded += StateHasChanged;
+        //NewbState.OnDataUpdated += StateHasChanged;
     }
     public void Dispose()
     {
-        NewbState.OnFilterRequested -= StateHasChanged;
-        NewbState.OnDataAdded -= StateHasChanged;
-        NewbState.OnDataUpdated -= StateHasChanged;
+        NewbState.OnStateChanged -= StateHasChanged;
+        //NewbState.OnAddModeChanged -= StateHasChanged;
+        //NewbState.OnEditModeChanged -= StateHasChanged;
+        //NewbState.OnFilterRequested -= StateHasChanged;
+        //NewbState.OnDataAdded -= StateHasChanged;
+        //NewbState.OnDataUpdated -= StateHasChanged;
     }
 
-    public bool AddMode { get; set; } = false;
-
-    private void SetAddMode() => AddMode = !AddMode;
-
+    void SetAddMode() => NewbState.ToggleAddMode();
     void FilterAction(char filterText) => NewbState.SetFilter(filterText.ToString());
 }

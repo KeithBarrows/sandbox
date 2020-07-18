@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BigO": {
+      "commandName": "Project",
+      "commandLineArgs": "config.txt paths.txt"
+    }
+  }
+}
