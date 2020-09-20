@@ -17,15 +17,10 @@ namespace Sol3.Infrastructure.Extensions
             return message;
         }
 
-        public static bool IsNullOrEmpty(this string src)
-        {
-            return string.IsNullOrEmpty(src);
-        }
-
-        public static bool ContainedIn(this string src, Dictionary<int, string> allowed)
-        {
-            return (src.IsInt() && allowed.ContainsKey(src.ToInt())) || allowed.ContainsValue(src.ToUpper());
-        }
+        public static bool IsNullOrWhitespace(this string src) => string.IsNullOrWhiteSpace(src);
+        public static bool IsNullOrEmpty(this string src) => string.IsNullOrEmpty(src);
+        public static bool ContainedIn(this string src, Dictionary<int, string> allowed) => (src.IsInt() && allowed.ContainsKey(src.ToInt())) || allowed.ContainsValue(src.ToUpper());
+        
 
         public static int ToInt(this string src, int? @default = null)
         {
@@ -53,9 +48,17 @@ namespace Sol3.Infrastructure.Extensions
             return allowed.ContainsValue(src.ToUpper()) ? src : string.Empty;
         }
 
-        public static bool ToBool(this string src, bool @default = false)
+        public static bool ToBool(this string src, bool @default = false) => bool.TryParse(src, out var ret) ? ret : @default;
+
+        public static string SimpleFileName(this string src)
         {
-            return bool.TryParse(src, out var ret) ? ret : @default;
+            var index = src.LastIndexOf('.');
+            return src.Substring(0, index);
+        }
+        public static string Extension(this string src)
+        {
+            var index = src.LastIndexOf('.');
+            return src.Substring(index + 1);
         }
 
     }
