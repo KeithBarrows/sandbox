@@ -244,3 +244,8 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
+Scraper/Scraper/Scraper.sln
+Scraper/Scraper/Scraper/Program.cs
+Scraper/Scraper/Scraper/Scraper.csproj
