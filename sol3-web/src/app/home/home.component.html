@@ -1,0 +1,32 @@
+<section [ngClass]="isMenuHidden ? 'showcase' : 'showcase active'">
+  <header>
+    <h2 class="logo">Sol3</h2>
+    <div (click)="toggleMenu()" [ngClass]="isMenuHidden ? 'toggle' : 'toggle active'">
+      <!-- <div class="collapsible-header" (click)="isMenuHidden=!isMenuHidden"> -->
+        <i class="material-icons" *ngIf="isMenuHidden">menu</i>
+        <i class="material-icons" *ngIf="!isMenuHidden">close</i>
+      <!-- </div> -->
+    </div>
+  </header>
+
+  <video src="assets/video.mp4" muted loop autoplay></video>
+
+  <div class="overlay"></div>
+
+  <div class="text">
+    <h2>Adventure and Tranquility</h2>
+    <h3>Pillared by Live, Laugh, Love, Inspire, Serve</h3>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste dolor cum ratione architecto, maiores reprehenderit, autem vero voluptatum laudantium tempore et nulla! Molestias ullam natus, suscipit possimus laudantium nulla odio esse mollitia commodi hic necessitatibus reiciendis, aliquam dolor alias explicabo.</p>
+    <a href="/">Explore</a>
+  </div>
+
+  <!-- <ul class="social">
+    <li><a href="#">Parler</a></li>
+    <li><a href="#">Gab</a></li>
+    <li><a href="#">Minds</a></li>
+  </ul> -->
+
+</section>
+
+<app-menu></app-menu>
+
