@@ -255,3 +255,17 @@ Scraper/Scraper/Scraper.sln
 Scraper/Scraper/Scraper/Program.cs
 Scraper/Scraper/Scraper/Scraper.csproj
 
+Election/ElectionTracker/ElectionTracker.csproj
+Election/ElectionTracker/ElectionTracker.sln
+Election/ElectionTracker/Program.cs
+Election/ElectionTracker/NyTimes/JasonFile.cs
+Scraper/Scraper.Api/appsettings.Development.json
+Scraper/Scraper.Api/appsettings.json
+Scraper/Scraper.Api/Program.cs
+Scraper/Scraper.Api/Scraper.Api.csproj
+Scraper/Scraper.Api/Startup.cs
+Scraper/Scraper.Api/WeatherForecast.cs
+Scraper/Scraper.Api/Controllers/ScraperController.cs
+Scraper/Scraper.Api/Controllers/WeatherForecastController.cs
+Scraper/Scraper.Api/Properties/launchSettings.json
+favicon_io.zip
