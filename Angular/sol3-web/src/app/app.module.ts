@@ -15,6 +15,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {Sol3MaterialModule} from './material-model'
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { ContactComponent } from './contact/contact.component';
+import { InterestsComponent } from './interests/interests.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ContactComponent } from './contact/contact.component';
     AboutComponent,
     HomeComponent,
     MenuComponent,
-    ContactComponent
+    ContactComponent,
+    InterestsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<section [ngClass]="isMenuHidden ? 'showcase about' : 'showcase about active'">
+  <header>
+    <h2 class="logo">Sol3</h2>
+    <div (click)="toggleMenu()" [ngClass]="isMenuHidden ? 'toggle' : 'toggle active'">
+      <!-- <div class="collapsible-header" (click)="isMenuHidden=!isMenuHidden"> -->
+      <i class="material-icons" *ngIf="isMenuHidden">menu</i>
+      <i class="material-icons" *ngIf="!isMenuHidden">close</i>
+      <!-- </div> -->
+    </div>
+  </header>
+
+  <div class="overlay"></div>
+
+  <video src="assets/pexels-taryn-elliott-6003707.mp4" muted loop autoplay></video>
+
+  <div class="body-panel">
+    <div class='widget-content'>
+      <iframe src="https://flipboard.com/@kbarrows/live-laugh-love-inspire-serve-3s4eoqrqz/widget?layout=banner" frameBorder="0" width="970" height="250" ></iframe>
+      <iframe src="https://flipboard.com/@kbarrows/emerging-technologies-and-grin-geadudjry/widget?layout=banner" frameBorder="0" width="970" height="250" ></iframe>
+      <iframe src="https://flipboard.com/@kbarrows/space-research-development-colonization-evmkhn0cy/widget?layout=banner" frameBorder="0" width="970" height="250" ></iframe>
+      <iframe src="https://flipboard.com/@kbarrows/the-developer-ad2aeoe7z/widget?layout=banner" frameBorder="0" width="970" height="250" ></iframe>
+    </div>
+  </div>
+</section>
+
+<app-menu></app-menu>
