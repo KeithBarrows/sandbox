@@ -1,10 +1,10 @@
 <section [ngClass]="isMenuHidden ? 'showcase' : 'showcase active'">
   <header>
-    <h2 class="logo">Sol3</h2>
+    <h2 class="logo">Sol3 - Blue Skies Unlimited</h2>
     <div (click)="toggleMenu()" [ngClass]="isMenuHidden ? 'toggle' : 'toggle active'">
       <!-- <div class="collapsible-header" (click)="isMenuHidden=!isMenuHidden"> -->
-        <i class="material-icons" *ngIf="isMenuHidden">menu</i>
-        <i class="material-icons" *ngIf="!isMenuHidden">close</i>
+      <i class="material-icons" *ngIf="isMenuHidden">menu</i>
+      <i class="material-icons" *ngIf="!isMenuHidden">close</i>
       <!-- </div> -->
     </div>
   </header>
@@ -16,10 +16,23 @@
   <div class="text">
     <h2>Adventure and Tranquility</h2>
     <h3>Pillared by Live, Laugh, Love, Inspire, Serve</h3>
-    <p>We are Keith & Kittery Barrows.  Welcome to our site.</p>
+    <p>We are Keith & Kittery. Welcome to our site.</p>
+    <br />
+    <br />
+    <div class="classic">
+      <h2 class="Value01">Live</h2>
+      <h3 class="Value01">...on Purpose</h3>
+      <h2 class="Value02">Laugh</h2>
+      <h3 class="Value02">...with grace</h3>
+      <h2 class="Value03">Love</h2>
+      <h3 class="Value03">...unconditionally</h3>
+      <h2 class="Value04">Inspire</h2>
+      <h3 class="Value04">...consistently</h3>
+      <h2 class="Value05">Serve</h2>
+      <h3 class="Value05">...warmly</h3>
+    </div>
     <!-- <a href="/">Explore</a> -->
   </div>
 </section>
 
 <app-menu></app-menu>
-

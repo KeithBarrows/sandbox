@@ -1,5 +1,6 @@
 import { Sol3MaterialModule } from './../material-model';
 import { Component, OnInit } from '@angular/core';
+import * as aboutData from './about.json';
 
 @Component({
   selector: 'app-about',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
+
+  posts: any = (aboutData as any).default;
 
   constructor() { }
 
