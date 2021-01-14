@@ -1,28 +1,44 @@
-<section [ngClass]="isMenuHidden ? 'showcase' : 'showcase active'">
+<section [ngClass]="isMenuHidden ? 'showcase about' : 'showcase about active'">
   <header>
     <h2 class="logo">Sol3</h2>
     <div (click)="toggleMenu()" [ngClass]="isMenuHidden ? 'toggle' : 'toggle active'">
       <!-- <div class="collapsible-header" (click)="isMenuHidden=!isMenuHidden"> -->
-        <i class="material-icons" *ngIf="isMenuHidden">menu</i>
-        <i class="material-icons" *ngIf="!isMenuHidden">close</i>
+      <i class="material-icons" *ngIf="isMenuHidden">menu</i>
+      <i class="material-icons" *ngIf="!isMenuHidden">close</i>
       <!-- </div> -->
     </div>
   </header>
 
-  <video src="assets/beach 01.mp4" muted loop autoplay></video>
-
   <div class="overlay"></div>
 
-  <div class="text">
+  <div class="underlay">
+    <video src="assets/beach 01.mp4" muted loop autoplay></video>
   </div>
 
-  <!-- <ul class="social">
-    <li><a href="#">Parler</a></li>
-    <li><a href="#">Gab</a></li>
-    <li><a href="#">Minds</a></li>
-  </ul> -->
+  <div class="body-panel">
+    <mat-accordion>
+      <div *ngFor="let post of posts">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <strong>{{post.title}} &nbsp;|&nbsp; {{post.created}}</strong>
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="post-body entry-content">
+            <img align="right" alt="269564_431635830217894_1253218194_n" border="0" height="240"
+              src="{{post.image}}?imgmax=800"
+              style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; margin: 0px 0px 5px 10px; display: inline; border-top-width: 0px"
+              title="269564_431635830217894_1253218194_n" width="{{post.width}}">
+            <div [innerHTML]="post.body"></div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
 
 </section>
 
 <app-menu></app-menu>
-
