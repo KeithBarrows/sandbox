@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
 :root {
-  --blueskies-blue: #03a9f4;
+  --blueskies-blue: #3B7292;
+  --blueskies-brown: #272923;
+  --blueskies-green: #737C53;
+  --blueskies-grey: #959B9E;
+  --blueskies-darkGrey: #424740;
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -10,7 +15,7 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .showcase{
@@ -26,6 +31,10 @@
   color:#fff;
   z-index: 2;
   transition: 0.5s;
+}
+
+.showcase.about{
+  align-items: flex-start;
 }
 
 .showcase.active{
@@ -62,7 +71,7 @@
 
 .logo{
   text-transform: uppercase;
-  cursor: pointer;
+  // cursor: pointer;
 }
 
 .showcase video {
@@ -85,23 +94,41 @@
   mix-blend-mode: overlay;
 }
 
+.underlay {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+
+.underlay video {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
 .text {
   position: relative;
   z-index: 10;
 }
 
 .text h2 {
-  font-size: 5em;
+  font-size: 3em;
   font-weight: 800;
   line-height: 1em;
   text-transform: uppercase;
 }
 
 .text h3 {
-  font-size: 4em;
+  font-size: 2em;
   font-weight: 700;
   line-height: 1em;
-  text-transform: uppercase;
+  //text-transform: uppercase;
 }
 
 .text p {
@@ -126,6 +153,13 @@
 
 .text a:hover {
   letter-spacing: 6px;
+}
+
+.body-panel {
+  position: relative;
+  z-index: 10;
+  top: 50px;
+  width: 90%;
 }
 
 .social {
@@ -153,33 +187,64 @@
   transform: scale(1.0) translateY(-15px);
 }
 
-.menu{
-  position: absolute;
-  top:0;
-  right:0;
-  width:300px;
-  height:100%;
-  display:flex;
-  align-items: center;
-  justify-content: center;
+blockquote {
+  font-style: italic;
+  border-left-style: groove;
+  border-left-width: 2px;
+  border-left-color: #C0C0C0;
+  padding: 5px;
+  margin: 5px 5px 5px 25px;
 }
 
-.menu ul{
-  position: relative;
-  list-style: none;
+.mat-expansion-panel {
+  background-color: rgba(20, 20, 20, 0.397);
 }
 
-.menu ul li a{
+.mat-expansion-panel-header {
+  text-align: right;
+  justify-content: space-between;
+}
+
+
+.post-body {
+  margin:20px;
+}
+
+.post-body a {
+  display: inline-block;
+  font-size: 1em;
+  background: #fff;
+  padding: 3px 6px;
   text-decoration: none;
-  font-size: 24px;
   color: #111;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: 0.2s;
 }
 
-.menu ul li a:hover{
-  color: var(--blueskies-blue);
+.post-body a:hover {
+  letter-spacing: 6px;
 }
 
-@media(max-width: 991px) {
+.post-body ol {
+  padding: 25px;
+  max-width: 1000px;
+}
+
+.post-body ul {
+  padding: 25px;
+  max-width: 1000px;
+}
+
+.post-body li {
+  padding-left: 15px;
+}
+
+@media(max-width: 1200px) {
+}
+
+@media(max-width: 1024px) {
   .showcase,
   .showcase header {
     padding: 40px;
@@ -190,5 +255,48 @@
   .text h3 {
     font-size: 2em;
   }
+  .post-body ol {
+    max-width: 750px;
+  }
+  .post-body ul {
+    max-width: 750px;
+  }
 }
 
+@media(max-width: 768px) {
+  .showcase,
+  .showcase header {
+    padding: 30px;
+  }
+  .text h2 {
+    font-size: 2em;
+  }
+  .text h3 {
+    font-size: 1.5em;
+  }
+  .post-body ol {
+    max-width: 600px;
+  }
+  .post-body ul {
+    max-width: 600px;
+  }
+}
+
+@media(max-width: 480px) {
+  .showcase,
+  .showcase header {
+    padding: 20px;
+  }
+  .text h2 {
+    font-size: 1.5em;
+  }
+  .text h3 {
+    font-size: 1.25em;
+  }
+  .post-body ol {
+    max-width: 400px;
+  }
+  .post-body ul {
+    max-width: 400px;
+  }
+}
