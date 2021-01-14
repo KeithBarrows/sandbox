@@ -1,3 +1,4 @@
+import { Sol3MaterialModule } from './../material-model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,6 +13,7 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  panelOpenState = false;
   isMenuHidden:boolean = true;
 
   public toggleMenu(){
