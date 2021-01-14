@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
 :root {
-  --blueskies-blue: #03a9f4;
+  --blueskies-blue: #3B7292;
+  --blueskies-brown: #272923;
+  --blueskies-green: #737C53;
+  --blueskies-grey: #959B9E;
+  --blueskies-darkGrey: #424740;
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -10,7 +15,7 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .showcase{
@@ -66,7 +71,7 @@
 
 .logo{
   text-transform: uppercase;
-  cursor: pointer;
+  // cursor: pointer;
 }
 
 .showcase video {
@@ -123,7 +128,7 @@
   font-size: 2em;
   font-weight: 700;
   line-height: 1em;
-  text-transform: uppercase;
+  //text-transform: uppercase;
 }
 
 .text p {
