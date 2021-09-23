@@ -3,6 +3,7 @@
 *.mp4
 *.png
 *.jpg
+*.zip
 
 ## Ignore Angular build folder
 **/dist
