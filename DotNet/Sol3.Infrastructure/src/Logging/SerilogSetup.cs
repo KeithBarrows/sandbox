@@ -142,6 +142,9 @@ namespace Sol3.Infrastructure.Logging
 
         private static LogEventLevel LogLevel(this string logLevel, LogEventLevel defaultEventLevel = LogEventLevel.Error)
         {
+            if (logLevel == null)
+                logLevel = "TRACE";
+
             // If we got a number, cast it and return...
             if (int.TryParse(logLevel, out var test))
             {
