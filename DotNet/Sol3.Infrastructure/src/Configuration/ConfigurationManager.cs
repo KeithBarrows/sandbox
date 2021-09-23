@@ -9,31 +9,24 @@ namespace Sol3.Infrastructure.Configuration
     {
         public static IConfigurationRoot InitializeConfiguration<T>() where T : class
         {
-            var dir = Directory.GetCurrentDirectory();
+            InitialBuilderSetup();
 
-            var globalbuilder = new ConfigurationBuilder()
-                .SetBasePath(dir)
-                .AddJsonFile("globalconfig.json");
-            var globalConfiguration = globalbuilder.Build();
+            if (StagingEnvironment.Equals("Development", StringComparison.CurrentCultureIgnoreCase))
+                Builder.AddUserSecrets<T>();
 
-            var stagingEnvironment = globalConfiguration["StagingEnvironment"] ?? "development";
-            var hasAppSettings = globalConfiguration["HasAppSettings"].ToBool();
-
-            var builder = new ConfigurationBuilder();
-
-            if(hasAppSettings)
-                builder.SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{stagingEnvironment}.json", optional: true, reloadOnChange: true);
-
-            if (stagingEnvironment.Equals("Development", StringComparison.CurrentCultureIgnoreCase))
-                builder.AddUserSecrets<T>();
-
-            var configuration = builder.Build();
+            Configuration = Builder.Build();
             
-            return configuration;
+            return Configuration;
         }
         public static IConfigurationRoot InitializeConfiguration()
+        {
+            InitialBuilderSetup();
+
+            Configuration = Builder.Build();
+            
+            return Configuration;
+        }
+        private static void InitialBuilderSetup()
         {
             var dir = Directory.GetCurrentDirectory();
 
@@ -42,22 +35,20 @@ namespace Sol3.Infrastructure.Configuration
                 .AddJsonFile("globalconfig.json");
             var globalConfiguration = globalbuilder.Build();
 
-            var stagingEnvironment = globalConfiguration["StagingEnvironment"] ?? "development";
-            var hasAppSettings = globalConfiguration["HasAppSettings"].ToBool();
+            StagingEnvironment = globalConfiguration["StagingEnvironment"] ?? "development";
+            HasAppSettings = globalConfiguration["HasAppSettings"].ToBool();
 
-            var builder = new ConfigurationBuilder();
+            Builder = new ConfigurationBuilder();
 
-            if(hasAppSettings)
-                builder.SetBasePath(Directory.GetCurrentDirectory())
+            if (HasAppSettings)
+                Builder.SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{stagingEnvironment}.json", optional: true, reloadOnChange: true);
-
-            // if (stagingEnvironment.Equals("Development", StringComparison.CurrentCultureIgnoreCase))
-            //     builder.AddUserSecrets();
-
-            var configuration = builder.Build();
-            
-            return configuration;
+                    .AddJsonFile($"appsettings.{StagingEnvironment}.json", optional: true, reloadOnChange: true);
         }
+
+        private static string StagingEnvironment { get; set; }
+        private static bool HasAppSettings { get; set; }
+        private static ConfigurationBuilder Builder { get; set; }
+        private static IConfigurationRoot Configuration { get; set; }
     }
 }
