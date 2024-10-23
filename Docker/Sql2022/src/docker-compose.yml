@@ -1,0 +1,35 @@
+# version: '3.8'
+services:
+  portal-database:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: "Portal-SQL2022"
+    ports:
+      - "1433:1433"
+    env_file:
+      - sqlserver.env
+      - sapassword.env
+    environment:
+      MSSQL_DATA_DIR: $(MSSQL_DATA_DIR)
+      MSSQL_LOG_DIR: $(MSSQL_LOG_DIR)
+      MSSQL_BACKUP_DIR: $(MSSQL_BACKUP_DIR)
+    volumes:
+      - type: bind
+        source: c:\data\mssql\2022\
+        target: /var/opt/mssql/
+      - type: bind
+        source: c:\data\mssql\2022\data
+        target: /var/opt/mssql/data
+      - type: bind
+        source: c:\data\mssql\2022\log
+        target: /var/opt/mssql/log
+      - type: bind
+        source: c:\data\mssql\2022\backup
+        target: /var/opt/mssql/backup
+
+#    healthcheck:
+#      test: sql ${MSSQL_DATABASE} --user=sa --password='${MSSQL_SA_PASSWORD}' --silent --execute "SELECT 1;"
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5       
