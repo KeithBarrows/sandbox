@@ -1,0 +1,3 @@
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=$(MSSQL_SA_PASSWORD)' -p 1433:1433 --name Sql22Portal -v c:\data\Sql22\Portal:/var/opt/mssql -d --restart unless-stopped mcr.microsoft.com/mssql/server:2022-latest
+
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=$(MSSQL_SA_PASSWORD)' -p 1433:1433 --name Sql19Portal -v c:\data\Sql19\Portal:/var/opt/mssql -d --restart unless-stopped mcr.microsoft.com/mssql/server:2019-latest
