@@ -12,3 +12,14 @@
 - docker exec PortalMsSql bash -c 'ls -lan /var/opt/mssql/data/*'
 - docker exec -u 0 PortalMsSql bash -c 'chown 10001:0 /var/opt/mssql/data/*'
 - docker exec -u 0 PortalMsSql bash -c 'chmod 660 /var/opt/mssql/data/*'
+
+----
+
+- docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong@Passw0rd>" -p 1433:1433 --name sql1 --hostname sql1 --restart unless-stopped  -v sql1data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2022-latest
+- docker exec -it sql1 mkdir /var/opt/mssql/backup
+- docker cp wwi.bak sql1:/var/opt/mssql/backup
+- docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost \
+   -U SA -P '<YourNewStrong!Passw0rd>' \
+   -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/backup/wwi.bak"' \
+   | tr -s ' ' | cut -d ' ' -f 1-2
+- [read this will help you](https://learn.microsoft.com/en-us/sql/linux/tutorial-restore-backup-in-sql-server-container?view=sql-server-ver16&tabs=cli) 
