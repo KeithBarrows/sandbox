@@ -23,3 +23,5 @@
    -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/backup/wwi.bak"' \
    | tr -s ' ' | cut -d ' ' -f 1-2
 - [read this will help you](https://learn.microsoft.com/en-us/sql/linux/tutorial-restore-backup-in-sql-server-container?view=sql-server-ver16&tabs=cli) 
+- [Github: mssql-customize](https://github.com/microsoft/mssql-docker/tree/master/linux/preview/examples/mssql-customize)
+- [The cleanest way to use Docker for testing in .NET](https://www.youtube.com/watch?v=8IRNC7qZBmk)
