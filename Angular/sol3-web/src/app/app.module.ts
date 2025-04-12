@@ -18,11 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AboutComponent,
-    HomeComponent,
-    MenuComponent,
-    ContactComponent
+    // Removed MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +27,11 @@ import { ContactComponent } from './contact/contact.component';
     FormsModule,
     HttpClientModule,
     Sol3MaterialModule,
-    //MatNativeDateModule,
-    //ReactiveFormsModule,
+    AppComponent,
+    AboutComponent,
+    HomeComponent,
+    ContactComponent,
+    MenuComponent // Moved here
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

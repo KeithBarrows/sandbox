@@ -1,31 +1,33 @@
-##----------------------------------------------##
-## Create Data Volume First                     ##
-## docker volume create portal_bkportal_sql2022 ##
-##----------------------------------------------##
-
-
-### Start with operating system
 FROM mcr.microsoft.com/mssql/server:2022-latest
-RUN echo `Using the stock/latest Sql Server 2022 image from docker-hub`
-
-RUN echo $(MSSQL_SA_PASSWORD)
 
 ENV ACCEPT_EULA=Y
-ENV SA_PASSWORD=$(MSSQL_SA_PASSWORD)
+ENV MSSQL_SA_PASSWORD=Sol3admin
 ENV MSSQL_PID=Developer
 ENV MSSQL_TCP_PORT=1433
 
-### Install language runtime
-### Install application dependencies
-COPY *.bak /var/opt/mssql/backup
+# set permissions on directories
+# RUN chown -R mssql:mssql /var/opt/mssql
+ 
+VOLUME ["/var/opt/mssql"]
 
-### Setup execution environment
-### Run application
+COPY *.bak /var/opt/mssql
 
+# switching to the mssql user
+USER mssql
 
-# WORKDIR /src
-# COPY filldata.sql ./filldata.sql
-# RUN (/opt/mssql/bin/sqlservr --accept-eula & ) | grep -q "Service Broker manager has started" 
+# CMD /opt/mssql/bin/sqlservr
+# RUN /var/opt/mssql/bin/sqlservr 
+# --accept-eula & ) | grep -q "Service Broker manager has started" 
 
 
 ## docker build .
+
+# docker run
+#  --env 'ACCEPT_EULA=Y'
+#  --env 'MSSQL_SA_PASSWORD=Sol3admin'
+#  --name 'PortalMsSql'
+#  --publish 1433:1433
+#  --volume PortalMsSqlData:/var/opt/mssql
+#  --detach mcr.microsoft.com/mssql/server:2022-latest
+
+# docker run --name Portal_SQL --publish 1433:1433 -detach portal/sql
