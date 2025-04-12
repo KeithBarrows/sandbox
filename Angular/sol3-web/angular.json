@@ -44,7 +44,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -67,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sol3-web:build"
+            "buildTarget": "sol3-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sol3-web:build:production"
+              "buildTarget": "sol3-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sol3-web:build"
+            "buildTarget": "sol3-web:build"
           }
         },
         "test": {
@@ -100,7 +99,7 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
             "tsConfig": [
               "tsconfig.app.json",
@@ -127,5 +126,7 @@
       }
     }
   },
-  "defaultProject": "sol3-web"
+  "cli": {
+    "analytics": false
+  }
 }
