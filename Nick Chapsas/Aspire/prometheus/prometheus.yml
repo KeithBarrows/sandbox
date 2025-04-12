@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 1s # makes for a good demo
+
+scrape_configs:
+  - job_name: 'frontend'
+    static_configs:
+      - targets: ['host.docker.internal:5084'] # hard-coded port matches launchSettings.json- job_name: 'weatherapp'
+  - job_name: 'weatherapi'
+    static_configs:
+      - targets: ['host.docker.internal:5202'] # hard-coded port matches launchSettings.json

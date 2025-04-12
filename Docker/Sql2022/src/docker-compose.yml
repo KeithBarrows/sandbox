@@ -3,7 +3,7 @@ services:
   portal-database:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: "Portal-SQL2022"
     ports:
       - "1433:1433"
@@ -27,6 +27,12 @@ services:
       - type: bind
         source: c:\data\mssql\2022\backup
         target: /var/opt/mssql/backup
+      - type: bind
+        source: c:\data\mssql\2022\system
+        target: /var/opt/mssql/system
+      - type: bind
+        source: c:\data\mssql\2022\secrets
+        target: /var/opt/mssql/secrets
 
 #    healthcheck:
 #      test: sql ${MSSQL_DATABASE} --user=sa --password='${MSSQL_SA_PASSWORD}' --silent --execute "SELECT 1;"
