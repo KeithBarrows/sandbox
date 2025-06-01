@@ -23,5 +23,7 @@ app.Run();
 
 /******************************************************************************************************
  * https://learn.microsoft.com/en-us/dotnet/core/resilience/?tabs=dotnet-cli
+ * https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience?tabs=dotnet-cli
+ * https://github.com/App-vNext/Polly
  * 
  ******************************************************************************************************/

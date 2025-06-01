@@ -1,0 +1,11 @@
+<![CDATA[<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.5.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+</Project>]]>
