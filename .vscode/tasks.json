@@ -7,9 +7,15 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Snippets/SOLID.Encoder/ConsoleApp1.csproj"
+                "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api/GalleriaService.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

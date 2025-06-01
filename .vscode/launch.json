@@ -1,28 +1,35 @@
 {
-   // Use IntelliSense to find out which attributes exist for C# debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-   "version": "0.2.0",
-   "configurations": [
+    "version": "0.2.0",
+    "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Galleria API (http|edge)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Snippets/SOLID.Encoder/bin/Debug/netcoreapp2.1/ConsoleApp1.dll",
+            "program": "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api/bin/Debug/net9.0/GalleriaService.Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Snippets/SOLID.Encoder",
-            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
-            "console": "externalTerminal",
+            "cwd": "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api",
             "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
+            "launchSettingsFilePath": "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api/Properties/launchSettings.json",
+            "launchSettingsProfile": "http",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         },
         {
-            "name": ".NET Core Attach",
+            "name": "Galleria API (https|edge)",
             "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api/bin/Debug/net9.0/GalleriaService.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api",
+            "stopAtEntry": false,
+            "launchSettingsFilePath": "${workspaceFolder}/DotNet.10/Galleria/src/GalleriaService.Api/Properties/launchSettings.json",
+            "launchSettingsProfile": "https",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         }
-    ,]
+    ]
 }
