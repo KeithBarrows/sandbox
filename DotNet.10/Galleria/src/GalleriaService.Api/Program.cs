@@ -1,3 +1,5 @@
+using GalleriaService.Api.Features;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -29,8 +31,9 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var GenerateTagsService = new GalleriaService.Api.Features.FileManagement.GenerateTags.Service();
-    GenerateTagsService.ExecuteAsync().GetAwaiter().GetResult();
+    // Services.ExecuteFileInfoGenerationAsync().GetAwaiter().GetResult();
+    // Services.ExecuteTagCloudCreationAsync().GetAwaiter().GetResult();
+    Services.ExecuteDuplicateIdentificationAsync().GetAwaiter().GetResult();
 
     var forecast =  Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast

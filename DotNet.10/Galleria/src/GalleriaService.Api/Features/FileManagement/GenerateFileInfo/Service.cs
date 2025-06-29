@@ -3,27 +3,11 @@ using System.Text.Json;
 using GalleriaService.Api.Abstracts.Interfaces;
 using GalleriaService.Api.Abstracts.Models;
 
-namespace GalleriaService.Api.Features.FileManagement.GenerateTags;
+namespace GalleriaService.Api.Features.FileManagement.GenerateFileInfo;
 
 public class Service : IService
 {
-    private readonly string[] _rootFolders = new[]
-    {
-        @"I:\Album",
-        @"I:\Category",
-        @"I:\Highlight",
-        @"I:\Person",
-        @"I:\Studio"
-    };
-
-    private readonly HashSet<string> _allowedExtensions = new(StringComparer.OrdinalIgnoreCase)
-    {
-        // Images
-        ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".heic", ".raw", ".cr2", ".nef",
-        // Videos
-        ".mp4", ".mov", ".avi", ".wmv", ".mkv", ".m4v", ".webm", ".flv", ".mpeg", ".mpg"
-    };
-
+    private string _spacer = "";
     public Service() { }
 
     public async Task ExecuteAsync()
@@ -36,17 +20,18 @@ public class Service : IService
         }
 
         // Process all root folders
-        foreach (var rootFolder in _rootFolders)
+        foreach (var rootFolder in RootFolders.FolderMap.Values)
         {
             if (Directory.Exists(rootFolder))
             {
+                Console.WriteLine($"|- {rootFolder}");
                 await GenerateTagsAsync(rootFolder);
             }
         }
 
         // Gather and combine all metadata files
         var allFiles = new List<DtoFileInfo>();
-        foreach (var rootFolder in _rootFolders)
+        foreach (var rootFolder in RootFolders.FolderMap.Values)
         {
             if (!Directory.Exists(rootFolder)) continue;
 
@@ -76,12 +61,13 @@ public class Service : IService
 
     private async Task GenerateTagsAsync(string rootPath)
     {
-        if (!_rootFolders.Contains(rootPath))
+        if (!RootFolders.FolderMap.ContainsValue(rootPath))
         {
             throw new ArgumentException($"Invalid root path: {rootPath}. Must be one of the configured root folders.");
         }
 
         var directChildFolders = Directory.GetDirectories(rootPath);
+        _spacer = "   ";
 
         foreach (var childFolder in directChildFolders)
         {
@@ -92,6 +78,7 @@ public class Service : IService
     private async Task ProcessFolderAsync(string folderPath, string rootPath)
     {
         var files = new List<DtoFileInfo>();
+        _spacer = "   ";
         await ProcessFilesInFolderAsync(folderPath, rootPath, files);
 
         if (files.Any())
@@ -107,12 +94,16 @@ public class Service : IService
 
     private async Task ProcessFilesInFolderAsync(string currentFolder, string rootPath, List<DtoFileInfo> files)
     {
+        Console.WriteLine($"{_spacer}|- {currentFolder.Replace(rootPath, "").TrimStart(Path.DirectorySeparatorChar)}");
+        _spacer = new string(' ', _spacer.Length + 3);
+
         // Process files in current folder
         foreach (var file in Directory.GetFiles(currentFolder))
         {
             var extension = Path.GetExtension(file);
-            if (!_allowedExtensions.Contains(extension)) continue;
+            if (!AllowedImageTypes.Extensions.Contains(extension) && !AllowedVideoTypes.Extensions.Contains(extension)) continue;
 
+            Console.WriteLine($"{_spacer}|- {Path.GetFileName(file)}");
             var fileInfo = new DtoFileInfo
             {
                 Path = GetRelativePath(file, rootPath),
@@ -127,6 +118,7 @@ public class Service : IService
         foreach (var subFolder in Directory.GetDirectories(currentFolder))
         {
             await ProcessFilesInFolderAsync(subFolder, rootPath, files);
+            _spacer = new string(' ', _spacer.Length - 3);
         }
     }
 
