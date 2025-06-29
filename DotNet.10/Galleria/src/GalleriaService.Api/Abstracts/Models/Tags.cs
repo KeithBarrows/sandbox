@@ -14,22 +14,22 @@ public static class Tags
 
     public static Dictionary<string, string> PrefixMap => new()
     {
-        { "p-", Person },
-        { "a-", Album },
-        { "s-", Studio },
-        { "t-", Type },
-        { "g-", Gallery },
-        { "c-", Category },
-        { "h-", Highlight }
+        { "p-", "Person" },
+        { "a-", "Album" },
+        { "s-", "Studio" },
+        { "t-", "Type" },
+        { "g-", "Gallery" },
+        { "c-", "Category" },
+        { "h-", "Highlight" }
     };
     public static Dictionary<string, string> PostfixMap => new()
     {
-        { Person, "p-" },
-        { Album, "a-" },
-        { Studio, "s-" },
-        { Type, "t-" },
-        { Gallery, "g-" },
-        { Category, "c-" },
-        { Highlight, "h-" }
+        { "Person", "p-" },
+        { "Album", "a-" },
+        { "Studio", "s-" },
+        { "Type", "t-" },
+        { "Gallery", "g-" },
+        { "Category", "c-" },
+        { "Highlight", "h-" }
     };
 }
