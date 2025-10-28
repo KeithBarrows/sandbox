@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/GalleriaService.Api/GalleriaService.Api.csproj",
+                "${workspaceFolder}/src/Galleria.slnx",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
