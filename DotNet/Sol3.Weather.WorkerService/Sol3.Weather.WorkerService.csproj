@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dotnet-Sol3.Weather.WorkerService-27F30E45-75A4-46FC-B525-6B7F16B6643E</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cronos" Version="0.7.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="7.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sol3.Core\Sol3.Core.csproj" />
+    <ProjectReference Include="..\Sol3.Data.OpenWeatherMap\src\Sol3.Data.OpenWeatherMap.csproj" />
+    <ProjectReference Include="..\Sol3.Data.SQL.Weather\Sol3.Data.SQL.Weather.csproj" />
+  </ItemGroup>
+</Project>

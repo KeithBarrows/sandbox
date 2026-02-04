@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.7" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Sol3.Core\Sol3.Core.csproj" />
     <ProjectReference Include="..\..\Sol3.Data.OpenWeatherMap\src\Sol3.Data.OpenWeatherMap.csproj" />
     <ProjectReference Include="..\..\Sol3.Infrastructure\src\Sol3.Infrastructure.csproj" />
   </ItemGroup>
