@@ -1,0 +1,15 @@
+# version: "3.9"
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    volumes:
+      - .\db:C:\Data\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "<YOUR!P@SSW0RD>"
+      ACCEPT_EULA: "Y"
+
+
+# docker login -u kbarrows -p 
