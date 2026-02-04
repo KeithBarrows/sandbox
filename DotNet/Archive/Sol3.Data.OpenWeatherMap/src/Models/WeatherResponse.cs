@@ -93,6 +93,14 @@ namespace Sol3.Data.OpenWeatherMap.Models
 
     public class WeatherResponse
     {
+        public void Deconstruct(out string name, out int pressure, out double temp, out double feelsLike)
+        {
+            name = Name;
+            pressure = Main.Pressure;
+            temp = Main.Temp;
+            feelsLike = Main.FeelsLike;
+        }
+
         [JsonPropertyName("coord")]
         public Coord Coord { get; set; }
 

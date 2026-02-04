@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "Sol3.Weather.WorkerService": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

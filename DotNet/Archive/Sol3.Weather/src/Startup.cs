@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Sol3.Core;
 using Sol3.Data.OpenWeatherMap.Services;
 using Sol3.Infrastructure.Logging;
 using Sol3.Weather;
@@ -15,8 +16,11 @@ namespace Sol3.Weather
             var logger = SerilogSetup.Setup("Sol3.Weather");
             logger.Information("Startup!");
 
+            //builder.Services.AddWeatherDbContext();
+
             //builder.Services.AddSingleton<Serilog.ILogger, logger>();
             builder.Services.AddTransient<ICurrentWeatherService, CurrentWeatherService>();
+
         }
     }
 }
