@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Files >100MB
+/Angular/sol3-web/src/assets/beach 02.mp4
+/Angular/sol3-web/src/assets/video_2.mp4
+
 /.angular/cache
 
 # compiled output
