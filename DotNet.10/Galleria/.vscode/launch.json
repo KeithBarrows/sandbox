@@ -1,0 +1,59 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Galleria API (http|edge)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/GalleriaService.Api/bin/Debug/net9.0/GalleriaService.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/GalleriaService.Api",
+            "stopAtEntry": false,
+            "launchSettingsFilePath": "${workspaceFolder}/src/GalleriaService.Api/Properties/launchSettings.json",
+            "launchSettingsProfile": "http",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Galleria API (https|edge)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/GalleriaService.Api/bin/Debug/net9.0/GalleriaService.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/GalleriaService.Api",
+            "stopAtEntry": false,
+            "launchSettingsFilePath": "${workspaceFolder}/src/GalleriaService.Api/Properties/launchSettings.json",
+            "launchSettingsProfile": "https",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Galleria Web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Galleria.Web/bin/Debug/net9.0/Galleria.Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Galleria.Web",
+            "stopAtEntry": false,
+            "launchSettingsFilePath": "${workspaceFolder}/src/Galleria.Web/Properties/launchSettings.json",
+            "launchSettingsProfile": "http",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Galleria API + Web",
+            "configurations": [
+                "Galleria API (http|edge)",
+                "Galleria Web"
+            ]
+        }
+    ]
+}

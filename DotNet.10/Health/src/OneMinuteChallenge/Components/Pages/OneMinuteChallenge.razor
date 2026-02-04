@@ -1,0 +1,325 @@
+@page "/1-minute-challenge"
+
+@using Models
+@inject Services.JsonStorageService StorageService
+@using System.Timers
+
+<PageTitle>1-Minute Challenge</PageTitle>
+
+<h1>1-Minute Challenge</h1>
+
+<p><b>"Just eat everything in moderation!"</b> sounds reasonable, but here's the thing—your glucose doesn't care about portion size if the food spikes you to 180.</p>
+
+<h3>Recent client data:</h3>
+<ul>
+    <li>1 slice of pizza: glucose to 165</li>
+    <li>2 slices of pizza: glucose to 170</li>
+    <li>The spike already started with slice #1. The "moderation" didn't matter.</li>
+</ul>
+
+<h3>What worked instead:</h3>
+<ul>
+    <li>Understanding <b>YOUR</b> glucose response to foods, not following generic rules.</li>
+</ul>
+
+<h3>My approach:</h3>
+<ul>
+    <li>Test foods based on the recommended serving size to establish a baseline. If it spikes you over 140, that food needs a strategy (protein buffer, walking, timing) or it needs to be occasional, not moderate.</li>
+</ul>
+
+<hr />
+
+
+
+<h2>Track it for yourself</h2>
+<ol>
+    <li><b>Step 1:</b> Select a meal/drink to track</li>
+    <li><b>Step 2:</b> Save the time when you start the consumption and the glucose reading</li>
+    <li><b>Step 3:</b> Consume your meal/drink (confirm when done)</li>
+    <li><b>Step 4:</b> Save the time when you end the consumption and the glucose reading</li>
+    <li><b>Step 5:</b> Every 5 minutes, with an alert, for the next 90 minutes save the glucose reading</li>
+</ol>
+
+@if (step == 1)
+{
+    <div>
+        <label>Select a meal/drink:</label>
+        <select @bind="selectedMealId">
+            <option value="">-- Select --</option>
+            @foreach (var meal in meals)
+            {
+                <option value="@meal.Id">@meal.Name</option>
+            }
+        </select>
+        <button class="btn btn-link" @onclick="ShowAddMeal">Add New</button>
+        <button class="btn btn-primary" @onclick="NextStep" disabled="@(string.IsNullOrEmpty(selectedMealId))">Next</button>
+    </div>
+}
+@if (showAddMeal)
+{
+    <div>
+        <input placeholder="Meal/drink name" @bind="newMealName" />
+        <input placeholder="Description (optional)" @bind="newMealDesc" />
+        <button class="btn btn-primary" @onclick="AddMeal">Save</button>
+        <button class="btn btn-secondary" @onclick="() => showAddMeal = false">Cancel</button>
+    </div>
+}
+@if (step == 2)
+{
+    <div style="margin-top:1em;">
+        <label>Glucose before meal:</label>
+        <input type="number" step="0.1" @bind="startGlucose" />
+        <button class="btn btn-primary" @onclick="SaveStartInfo" disabled="@(startGlucose <= 0)">Save & Next</button>
+    </div>
+}
+@if (step == 3)
+{
+    <div style="margin-top:1em;">
+        <p>Consume your meal/drink now.</p>
+        <button class="btn btn-primary" @onclick="NextStep">Done Consuming</button>
+    </div>
+}
+@if (step == 4)
+{
+    <div style="margin-top:1em;">
+        <label>Glucose after meal:</label>
+        <input type="number" step="0.1" @bind="endGlucose" />
+        <button class="btn btn-primary" @onclick="SaveEndInfo" disabled="@(endGlucose <= 0)">Save & Start 90-Minute Tracking</button>
+    </div>
+}
+@if (step == 5)
+{
+    <div style="margin-top:1em;">
+        <p>Tracking for 90 minutes. Timer: <b>@timerDisplay</b></p>
+        <p>Next glucose reading in: <b>@intervalDisplay</b></p>
+        <button class="btn btn-danger" @onclick="StopTracking">End Early</button>
+        @if (showGlucosePrompt)
+        {
+            <div style="margin-top:1em;">
+                <label>Enter glucose reading:</label>
+                <input type="number" step="0.1" @bind="intervalGlucose" />
+                <button class="btn btn-primary" @onclick="SaveIntervalReading">Save Reading</button>
+            </div>
+        }
+        <div style="margin-top:1em;">
+            <h5>Interval Readings</h5>
+            <ul>
+                @foreach (var r in trackingEntry?.IntervalReadings ?? new())
+                {
+                    <li>@r.Timestamp.ToShortTimeString(): @r.Value</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+@if (step == 6 && trackingEntry != null)
+{
+    <div style="margin-top:1em;">
+        <label>How do you feel?</label>
+        <input @bind="howYouFeel" placeholder="Energized, tired, etc." />
+        <button class="btn btn-primary" @onclick="SaveFinalEntry">Save Entry</button>
+    </div>
+}
+@if (saveMessage != null)
+{
+    <div class="alert alert-success">@saveMessage</div>
+}
+
+@if (saveMessage != null)
+{
+    <div class="alert alert-success">@saveMessage</div>
+}
+
+<hr />
+
+<h3>For Analytical Members</h3>
+<ul>
+    <li>Try the same food 3 different days and see if the pattern holds</li>
+    <li>This is your personal data.</li>
+</ul>
+
+<footer>
+    <p>You can learn more about how to maintain optimal post-meal glucose here.</p>
+    <p>Liz McKinney, MS, CNS, LDN<br />Your body is giving you the data—time to listen 📊</p>
+</footer>
+
+@code {
+    private List<Meal> meals = new();
+    private string selectedMealId = string.Empty;
+    private string selectedMealName => meals.FirstOrDefault(m => m.Id == selectedMealId)?.Name ?? "";
+    private bool showAddMeal = false;
+    private string newMealName = string.Empty;
+    private string newMealDesc = string.Empty;
+
+    private int step = 1;
+    private bool trackingActive = false;
+    private bool timerFinished = false;
+    private int secondsLeft = 90 * 60;
+    private string timerDisplay => $"{secondsLeft / 60:D2}:{secondsLeft % 60:D2}";
+    private System.Timers.Timer? timer;
+    private int intervalSeconds = 5 * 60;
+    private int intervalCountdown = 5 * 60;
+    private string intervalDisplay => $"{intervalCountdown / 60:D2}:{intervalCountdown % 60:D2}";
+    private bool showGlucosePrompt = false;
+    private double intervalGlucose = 0;
+
+    private double startGlucose = 0;
+    private double endGlucose = 0;
+    private string howYouFeel = string.Empty;
+    private TrackingEntry? trackingEntry;
+    private string? saveMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        meals = await StorageService.GetMealsAsync();
+    }
+
+    private void ShowAddMeal()
+    {
+        showAddMeal = true;
+        newMealName = string.Empty;
+        newMealDesc = string.Empty;
+    }
+
+    private async Task AddMeal()
+    {
+        if (!string.IsNullOrWhiteSpace(newMealName))
+        {
+            var meal = new Meal { Name = newMealName, Description = newMealDesc };
+            meals.Add(meal);
+            await StorageService.SaveMealsAsync(meals);
+            showAddMeal = false;
+            StateHasChanged();
+        }
+    }
+
+    private void NextStep()
+    {
+        step++;
+    }
+
+    private async Task SaveStartInfo()
+    {
+        trackingEntry = new TrackingEntry
+        {
+            MealId = selectedMealId,
+            StartTime = DateTime.Now,
+            StartGlucose = startGlucose
+        };
+        step = 3;
+    }
+
+    private async Task SaveEndInfo()
+    {
+        if (trackingEntry != null)
+        {
+            trackingEntry.EndTime = DateTime.Now;
+            trackingEntry.EndGlucose = endGlucose;
+            step = 5;
+            trackingActive = true;
+            timerFinished = false;
+            secondsLeft = 90 * 60;
+            intervalCountdown = 5 * 60;
+            StartTimer();
+        }
+    }
+
+    private async Task StopTracking()
+    {
+        StopTimer();
+        trackingActive = false;
+        timerFinished = true;
+        showGlucosePrompt = false;
+        step = 6;
+        StateHasChanged();
+    }
+
+
+    private void StartTimer()
+    {
+        timer = new System.Timers.Timer(1000);
+        timer.Elapsed += OnTimerElapsed;
+        timer.Start();
+    }
+
+    private void StopTimer()
+    {
+        timer?.Stop();
+        trackingActive = false;
+        timerFinished = false;
+        showGlucosePrompt = false;
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        if (secondsLeft > 0)
+        {
+            secondsLeft--;
+            intervalCountdown--;
+            if (intervalCountdown == 0)
+            {
+                showGlucosePrompt = true;
+                intervalCountdown = 5 * 60;
+                InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                InvokeAsync(StateHasChanged);
+            }
+        }
+        else
+        {
+            timer?.Stop();
+            trackingActive = false;
+            timerFinished = true;
+            showGlucosePrompt = false;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void ResetAll()
+    {
+        timer?.Stop();
+        trackingActive = false;
+        timerFinished = false;
+        showGlucosePrompt = false;
+        trackingEntry = null;
+        startGlucose = 0;
+        endGlucose = 0;
+        howYouFeel = string.Empty;
+        intervalGlucose = 0;
+        saveMessage = null;
+    }
+
+    private void SaveIntervalReading()
+    {
+        if (trackingEntry != null && intervalGlucose > 0)
+        {
+            trackingEntry.IntervalReadings.Add(new GlucoseReading
+            {
+                Timestamp = DateTime.Now,
+                Value = intervalGlucose
+            });
+            intervalGlucose = 0;
+            showGlucosePrompt = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SaveFinalEntry()
+    {
+        if (trackingEntry != null)
+        {
+            trackingEntry.HowYouFeel = howYouFeel;
+            var entries = await StorageService.GetTrackingEntriesAsync();
+            entries.Add(trackingEntry);
+            await StorageService.SaveTrackingEntriesAsync(entries);
+            saveMessage = "Tracking entry saved!";
+            ResetAll();
+            step = 1;
+            await Task.Delay(2000);
+            saveMessage = null;
+            StateHasChanged();
+        }
+    }
+}
