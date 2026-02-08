@@ -1,0 +1,10 @@
+**Fleet Name:** [from your fleet announcement post]  
+**Fleet Purpose:** [from the fleet announcement post] 
+**Date:** [from the fleet announcement post] 
+**FC:** [from the fleet announcement post]  
+**Fleet Members and Roles:** [who was there and what were their roles?]  
+**Fleet Summary:** [where did you go? what did you do? what happened along the way, and once you arrived? “start at the beginning, and when you come to the end, stop.”]  
+**Lessons Learned:** [what went right, what went wrong, and what did you learn?]  
+**Future Directions:** [what’s next?]  
+
+[insert screenshots with descriptions]
