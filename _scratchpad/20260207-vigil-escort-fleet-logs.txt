@@ -1,0 +1,356 @@
+        ---------------------------------------------------------------
+
+          Channel ID:      fleet_1293812248504
+          Channel Name:    Fleet
+          Listener:        Katherine Skysong
+          Session started: 2026.02.07 22:44:00
+        ---------------------------------------------------------------
+
+[ 2026.02.07 22:44:04 ] Light Lund > Oh, are covops cynos no good for today?
+[ 2026.02.07 22:44:12 ] Isaac Apylon > invite sent
+[ 2026.02.07 22:44:29 ] Katherine Skysong > I am flying my Pilgrim
+[ 2026.02.07 22:44:36 ] Kara Shi > Supra yO see if he needs anything
+[ 2026.02.07 22:44:51 ] Xi Shan > Love the Pilgrims
+[ 2026.02.07 22:45:25 ] Supra yO > Im all set
+[ 2026.02.07 22:45:28 ] Supra yO > ty
+[ 2026.02.07 22:46:05 ] Kara Shi > CCP Jotunn invite to fleet
+[ 2026.02.07 22:46:29 ] Lexington Braddock > Hello Fleet o/
+[ 2026.02.07 22:46:34 ] Ben Kalkoken > o/
+[ 2026.02.07 22:46:38 ] CCP Jotunn > o7
+[ 2026.02.07 22:46:38 ] A Dead Parrot > o/
+[ 2026.02.07 22:46:39 ] Xavec > CCP Jotunn welcome
+[ 2026.02.07 22:46:40 ] Light Lund > o/
+[ 2026.02.07 22:46:42 ] Auds Lennelluc > o7
+[ 2026.02.07 22:46:44 ] Strelnikova > o7 Ahoy all
+[ 2026.02.07 22:46:46 ] Xi Shan > o/
+[ 2026.02.07 22:46:49 ] Lexington Braddock > CCP Jotunn o7
+[ 2026.02.07 22:47:09 ] CCP Jotunn > are we taking the route through vecamia?
+[ 2026.02.07 22:47:13 ] Strelnikova > y
+[ 2026.02.07 22:47:15 ] Isaac Apylon > yes
+[ 2026.02.07 22:47:18 ] CCP Jotunn > ++
+[ 2026.02.07 22:47:24 ] Ben Kalkoken > I've got my cyno ship in my hold, I'll have to switch hulls in one of the stations in Vec.
+[ 2026.02.07 22:47:35 ] Kara Shi > CCP Jotunn need our Discord channel?
+[ 2026.02.07 22:48:18 ] CCP Jotunn > I won't be in comms - I'm in separate comms atm with my guys doing some wh stuff, but I will be present down here throughout
+[ 2026.02.07 22:48:22 ] CCP Jotunn > I'll just follow you guys
+[ 2026.02.07 22:48:31 ] Isaac Apylon > got it
+[ 2026.02.07 22:48:32 ] Kara Shi > Sounds good
+[ 2026.02.07 22:49:53 ] Light Lund > x
+[ 2026.02.07 22:49:54 ] Kaeracin > x
+[ 2026.02.07 22:49:55 ] Katherine Skysong > x
+[ 2026.02.07 22:50:10 ] Ben Kalkoken > x in a 2nd ship in my SMB.
+[ 2026.02.07 22:52:39 ] Strelnikova > It has been pimped
+[ 2026.02.07 22:53:05 ] Ben Kalkoken > 5/5
+[ 2026.02.07 22:53:09 ] Torquay > yes
+[ 2026.02.07 22:53:12 ] Xi Shan > Clear
+[ 2026.02.07 22:53:17 ] ExxeyStein > Ill try to record it, but cant promise good stuff
+[ 2026.02.07 22:53:32 ] Isaac Apylon > Molea will be our destination
+[ 2026.02.07 22:53:45 ] Jenny Everywhere > best place to ask questions or respond is in this chat?
+[ 2026.02.07 22:53:50 ] Isaac Apylon > yes
+[ 2026.02.07 22:54:23 ] Jenny Everywhere > o7
+[ 2026.02.07 22:54:28 ] Xi Shan > I bring lots of the Rime ice ones and Nebula
+[ 2026.02.07 22:54:29 ] Lavoleine Audier > o7
+[ 2026.02.07 22:54:35 ] Kara Shi > CCP Zelus invite to fleet
+[ 2026.02.07 22:54:39 ] Supra yO > invite  Ash3D plz
+[ 2026.02.07 22:54:42 ] Aithra Dreamweaver > can you link Molea again?
+[ 2026.02.07 22:54:46 ] Ben Kalkoken > Molea
+[ 2026.02.07 22:54:47 ] Yoshi Katelo > Molea
+[ 2026.02.07 22:54:49 ] Auds Lennelluc > GIven my align, I'll hold short of Vecamia and anyone who needs Ozone can pop out of system to the gate in Tarta to refuel from my fleet bay if needed.
+[ 2026.02.07 22:54:51 ] Aithra Dreamweaver > ty
+[ 2026.02.07 22:55:10 ] Xavec > Who is Ash 3d?
+[ 2026.02.07 22:55:32 ] Aithra Dreamweaver > Are we going dhorter or safer route?
+[ 2026.02.07 22:55:37 ] Aithra Dreamweaver > shorter
+[ 2026.02.07 22:55:41 ] Aithra Dreamweaver > ty
+[ 2026.02.07 22:56:05 ] Xavec > Ash3D is undocked outside Theo
+[ 2026.02.07 22:56:38 ] Xavec > Sure
+[ 2026.02.07 22:56:51 ] ExxeyStein > do i still have time to make tea?
+[ 2026.02.07 22:56:51 ] Xavec > I am in my on-call room in the hospital though so I can't talk :)
+[ 2026.02.07 22:57:00 ] Kara Shi > Ash3D do you need Discord voice channel?
+[ 2026.02.07 22:57:23 ] Kara Shi > CCP Aperture invite to fleet
+[ 2026.02.07 22:57:54 ] Auds Lennelluc > is there a bookmarks folder for this fleet?
+[ 2026.02.07 22:58:52 ] Xavec > I tried to convo Aperture
+[ 2026.02.07 22:58:57 ] Xavec > i think maybe auto reject
+[ 2026.02.07 22:59:24 ] Xavec > CCP Zelus says not eligible for fleet
+[ 2026.02.07 22:59:30 ] Xavec > is it set to corp only?
+[ 2026.02.07 23:00:02 ] Strelnikova > no, we have other hosts
+[ 2026.02.07 23:00:20 ] Xavec > Isaac Apylon any ideas
+[ 2026.02.07 23:00:52 ] Aithra Dreamweaver > do we have naming convention apart from [1420.] ?
+[ 2026.02.07 23:01:09 ] Xi Shan > Think not
+[ 2026.02.07 23:01:15 ] Ben Kalkoken > Nothing rude, no puns or things like that.
+[ 2026.02.07 23:01:23 ] ExxeyStein > How to call my ship?
+[ 2026.02.07 23:01:37 ] Xavec > Isaac Apylon CCP Zelus not in fleet
+[ 2026.02.07 23:01:43 ] Xavec > says not eligible
+[ 2026.02.07 23:01:45 ] Strelnikova > ExxeyStein right click on the ship and change name
+[ 2026.02.07 23:01:51 ] Auds Lennelluc > ExxeyStein [1420.] "something sensible"
+[ 2026.02.07 23:01:55 ] Dry Baby > how about [1420.] Honor Guard?
+[ 2026.02.07 23:02:15 ] Xavec > Dry Baby like it
+[ 2026.02.07 23:03:02 ] Aithra Dreamweaver > My ship is [1420.] Ait Hugs
+[ 2026.02.07 23:03:18 ] ExxeyStein > records going
+[ 2026.02.07 23:03:57 ] Xi Shan > [1420;] Honour 荣誉 for me
+[ 2026.02.07 23:04:32 ] Supra yO > razor6969  Fierbird Altol  PixieDash
+[ 2026.02.07 23:04:47 ] Xavec > all invited
+[ 2026.02.07 23:04:55 ] Supra yO > EggHead321  Gregory Uker
+[ 2026.02.07 23:05:19 ] Supra yO > Bardcode Antollare
+[ 2026.02.07 23:05:44 ] razor6969 > Aepus Saisorre
+[ 2026.02.07 23:05:48 ] Supra yO > Theo Davidson
+[ 2026.02.07 23:05:54 ] Supra yO > Theo Alterson  Talia Dahl
+[ 2026.02.07 23:06:34 ] Xi Shan > Avoiding Vecamia?
+[ 2026.02.07 23:06:43 ] Aithra Dreamweaver > 14 jumps through Vecamia for me
+[ 2026.02.07 23:06:54 ] ExxeyStein > +
+[ 2026.02.07 23:06:58 ] Auds Lennelluc > What's the plan B route?
+[ 2026.02.07 23:07:24 ] Yoshi Katelo > please invite  Fritte Cornelius 
+[ 2026.02.07 23:07:29 ] Kara Shi > Nardiarang
+[ 2026.02.07 23:07:35 ] Fritte Cornelius > thank you
+[ 2026.02.07 23:07:47 ] CCP Zelus > Molea
+[ 2026.02.07 23:07:54 ] Auds Lennelluc > 3 LS jumps?
+[ 2026.02.07 23:08:08 ] Auds Lennelluc > o7
+[ 2026.02.07 23:08:15 ] Aithra Dreamweaver > Auds Lennelluc o7
+[ 2026.02.07 23:08:22 ] Auds Lennelluc > Aithra Dreamweaver o/
+[ 2026.02.07 23:09:39 ] Lavoleine Audier > Auds Lennelluc i see just vecamia
+[ 2026.02.07 23:09:54 ] Aithra Dreamweaver > Lavoleine Audier use shorter route
+[ 2026.02.07 23:10:00 ] Xavec > Nardiarang then  Molea
+[ 2026.02.07 23:10:15 ] Auds Lennelluc > ^^
+[ 2026.02.07 23:10:54 ] ExxeyStein > Kara Shi is it possible to repeat the intro? for the record?
+[ 2026.02.07 23:11:48 ] Lavoleine Audier > Aithra Dreamweaver ya, I use shorter and vecamia is the only ls for me
+[ 2026.02.07 23:11:59 ] Fritte Cornelius > Nardiarang
+[ 2026.02.07 23:12:07 ] CCP Zelus > Like a boomerang but with a Nardia
+[ 2026.02.07 23:12:57 ] Xavec > My friend Nardia wanted to speak to me so Nardia rang
+[ 2026.02.07 23:13:00 ] Lavoleine Audier > Fritte Cornelius thx
+[ 2026.02.07 23:13:11 ] Xi Shan > I in safe spot
+[ 2026.02.07 23:14:40 ] Torquay > we're holding, right?
+[ 2026.02.07 23:14:50 ] Fritte Cornelius > yup
+[ 2026.02.07 23:14:55 ] ExxeyStein > yup. i jumped
+[ 2026.02.07 23:15:20 ] Xi Shan > Sorry I jump and go to new safe
+[ 2026.02.07 23:15:51 ] ExxeyStein > Does Changing Eve's language require to reopen the game?
+[ 2026.02.07 23:16:03 ] Torquay > will we hol cloak oafter jump?
+[ 2026.02.07 23:16:37 ] A Dead Parrot > Torquay o7
+[ 2026.02.07 23:17:01 ] Torquay > A Dead Parrot o7
+[ 2026.02.07 23:17:18 ] Fierbird Altol > two jumps out, sorry
+[ 2026.02.07 23:17:25 ] EggHead321 > dw im coming
+[ 2026.02.07 23:17:37 ] Fierbird Altol > all good
+[ 2026.02.07 23:17:40 ] EggHead321 > all good
+[ 2026.02.07 23:18:06 ] Dry Baby > I'll join fleet in Lor
+[ 2026.02.07 23:18:36 ] Lexington Braddock > Great to see the Polaris Enigma <3
+[ 2026.02.07 23:19:09 ] CCP Zelus > <3
+[ 2026.02.07 23:19:13 ] Fierbird Altol > caught up, thanks guys <3
+[ 2026.02.07 23:19:48 ] razor6969 > CCP Jotunn <3
+[ 2026.02.07 23:20:38 ] Fritte Cornelius > Xi <3
+[ 2026.02.07 23:21:22 ] Auds Lennelluc > warping to safe
+[ 2026.02.07 23:21:53 ] Xi Shan > Really so not used to other people warping my ship!
+[ 2026.02.07 23:22:05 ] Xi Shan > Fritte Cornelius o/
+[ 2026.02.07 23:22:52 ] PixieDash > current desto atm is nardiarang right?
+[ 2026.02.07 23:23:00 ] Fritte Cornelius > PixieDash yes
+[ 2026.02.07 23:23:03 ] Yoshi Katelo > Nardiarang
+[ 2026.02.07 23:23:06 ] PixieDash > ty, omw
+[ 2026.02.07 23:23:15 ] Auds Lennelluc > Woldrof Baloc Thingold would you set up an unaligned refuelling safe too please? if you've time
+[ 2026.02.07 23:23:44 ] Strelnikova > CCP stop fireworks
+[ 2026.02.07 23:23:46 ] Strelnikova > :)
+[ 2026.02.07 23:23:55 ] Strelnikova > we are waiting for the cyno
+[ 2026.02.07 23:24:06 ] A Dead Parrot > No fireworks until after the Eulogy
+[ 2026.02.07 23:24:24 ] CCP Jotunn > ++
+[ 2026.02.07 23:24:30 ] ExxeyStein > :D
+[ 2026.02.07 23:24:43 ] razor6969 > Molea
+[ 2026.02.07 23:27:47 ] Fritte Cornelius > o7
+[ 2026.02.07 23:27:48 ] Strelnikova > o7
+[ 2026.02.07 23:27:49 ] Ben Kalkoken > o7
+[ 2026.02.07 23:27:50 ] Light Lund > o7
+[ 2026.02.07 23:27:50 ] Jenny Everywhere > o7
+[ 2026.02.07 23:27:51 ] Torquay > o7
+[ 2026.02.07 23:27:51 ] Isaac Apylon > o7
+[ 2026.02.07 23:27:51 ] Woldrof Baloc Thingold > o7
+[ 2026.02.07 23:27:51 ] Fierbird Altol > o7
+[ 2026.02.07 23:27:51 ] razor6969 > o7
+[ 2026.02.07 23:27:52 ] EggHead321 > o7
+[ 2026.02.07 23:27:53 ] Gregory Uker > o7
+[ 2026.02.07 23:27:53 ] Lavoleine Audier > o7
+[ 2026.02.07 23:27:54 ] Aithra Dreamweaver > o7
+[ 2026.02.07 23:27:55 ] Dry Baby > o7
+[ 2026.02.07 23:27:55 ] PixieDash > o7
+[ 2026.02.07 23:27:57 ] Supra yO > o7
+[ 2026.02.07 23:28:18 ] Kara Shi > o7
+[ 2026.02.07 23:29:17 ] Auds Lennelluc > o7
+[ 2026.02.07 23:29:44 ] Isaac Apylon > Cyno pilots please make sure you are not on auto-repeat
+[ 2026.02.07 23:30:03 ] ExxeyStein > do i need to lock someone to fire fireworks?
+[ 2026.02.07 23:30:09 ] Light Lund > ExxeyStein yes
+[ 2026.02.07 23:30:09 ] PixieDash > yes
+[ 2026.02.07 23:30:16 ] Strelnikova > ExxeyStein yea
+[ 2026.02.07 23:30:35 ] CCP Aperture > o7
+[ 2026.02.07 23:30:42 ] Fritte Cornelius > Isaac Apylon that was me sorry ;)
+[ 2026.02.07 23:32:28 ] Katherine Skysong > down
+[ 2026.02.07 23:32:44 ] Light Lund > down
+[ 2026.02.07 23:32:50 ] CCP Zelus > o7
+[ 2026.02.07 23:34:21 ] ExxeyStein > Cargo Container* XD
+[ 2026.02.07 23:34:29 ] Fritte Cornelius > ( mine has 1mn but don't wait me, I will swtich to astero in zoo, I will catch you)
+[ 2026.02.07 23:34:53 ] Yoshi Katelo > ty
+[ 2026.02.07 23:36:27 ] Gregory Uker > if we could invite  xSky Dreamer thatd be great
+[ 2026.02.07 23:37:09 ] EggHead321 > mark has bad standings lol
+[ 2026.02.07 23:37:16 ] CCP Jotunn > shhhh
+[ 2026.02.07 23:37:19 ] CCP Jotunn > I have commit no crimes
+[ 2026.02.07 23:37:24 ] Supra yO > 23:36:56    Notify    All criminals in the Amarr Empire will be shot on sight! Venturing into our space will be your last mistake, CCP Jotunn!
+[ 2026.02.07 23:37:54 ] CCP Zelus > There goes Jotunn, blasting off again
+[ 2026.02.07 23:38:01 ] CCP Jotunn > running from the law
+[ 2026.02.07 23:38:12 ] Yoshi Katelo > :))
+[ 2026.02.07 23:38:30 ] Lexington Braddock > LOL
+[ 2026.02.07 23:38:33 ] Aepus Saisorre > I thought Mark was dressed smart for the vigil
+[ 2026.02.07 23:38:39 ] Aepus Saisorre > Turns out, he just has a court date in Amarr
+[ 2026.02.07 23:38:44 ] Xi Shan > I coming, not worry about me
+[ 2026.02.07 23:38:53 ] Isaac Apylon > Xi Shan got it
+[ 2026.02.07 23:39:06 ] Xi Shan > Been trying to film photo
+[ 2026.02.07 23:39:12 ] Fritte Cornelius > don't worry about me neither, I will be there at time :)
+[ 2026.02.07 23:39:20 ] Fierbird Altol > uh oh...
+[ 2026.02.07 23:39:57 ] Xi Shan > ?
+[ 2026.02.07 23:40:13 ] Dry Baby > Omnipotent << lol!
+[ 2026.02.07 23:40:15 ] Fierbird Altol > Yeah was just seeing the law get angry at Jotunn haha, my bad
+[ 2026.02.07 23:40:34 ] CCP Jotunn > they'll never catch me
+[ 2026.02.07 23:40:53 ] Theo Alterson > what would they do if they could?
+[ 2026.02.07 23:41:01 ] CCP Jotunn > send a strongly worded letter
+[ 2026.02.07 23:41:05 ] Gregory Uker > disintegrate
+[ 2026.02.07 23:41:07 ] Talia Dahl > ha
+[ 2026.02.07 23:41:11 ] CCP Zelus > Jotunn has Eurobeat constantly at 11 in his Yacht
+[ 2026.02.07 23:41:44 ] Xi Shan > ya I Dresi
+[ 2026.02.07 23:41:44 ] CCP Zelus > I had Dresi too
+[ 2026.02.07 23:41:49 ] CCP Jotunn > same
+[ 2026.02.07 23:41:50 ] CCP Zelus > ITs probably a split
+[ 2026.02.07 23:41:56 ] Ash3D > CCPlease
+[ 2026.02.07 23:41:58 ] Auds Lennelluc > just passed throught dresi
+[ 2026.02.07 23:42:06 ] Xavec > 2 different routes to the same place
+[ 2026.02.07 23:42:27 ] Xi Shan > sorry I through Dresi
+[ 2026.02.07 23:42:29 ] Xi Shan > I fine
+[ 2026.02.07 23:42:39 ] Xi Shan > I see you at Molea
+[ 2026.02.07 23:42:41 ] Auds Lennelluc > Dresi route clear 3-4 mins ago
+[ 2026.02.07 23:43:14 ] Strelnikova > Auds Lennelluc so fast that orca
+[ 2026.02.07 23:43:47 ] Auds Lennelluc > Strelnikova plain orca, mwd and autopilot trick
+[ 2026.02.07 23:44:25 ] ExxeyStein > the fastest orca in whole new eden
+[ 2026.02.07 23:44:28 ] Xi Shan > See you Dead Parrot!
+[ 2026.02.07 23:45:21 ] ExxeyStein > wait, did someone got destroyed?
+[ 2026.02.07 23:45:39 ] Isaac Apylon > who?
+[ 2026.02.07 23:46:09 ] ExxeyStein > n. sorry. my eyes lied to me
+[ 2026.02.07 23:50:54 ] A Dead Parrot > Xi Shan thats a fast Nestor!
+[ 2026.02.07 23:50:59 ] Auds Lennelluc > At 17k bookmark when people need fireworks resupply - fleet hangar set to Fleet, can top up from main hangar when needed
+[ 2026.02.07 23:51:39 ] Dry Baby > Xi Shan luv the skin!
+[ 2026.02.07 23:51:42 ] PixieDash > omw sec
+[ 2026.02.07 23:51:45 ] EggHead321 > in system
+[ 2026.02.07 23:51:52 ] PixieDash > 5au
+[ 2026.02.07 23:51:53 ] razor6969 > xSky Dreamer can you inv to fleet
+[ 2026.02.07 23:51:57 ] Gregory Uker > fleet invite  xSky Dreamer please
+[ 2026.02.07 23:52:07 ] Gregory Uker > ty
+[ 2026.02.07 23:52:17 ] ExxeyStein > Xi Shan i could see your Nestor from everyangle! thats cool
+[ 2026.02.07 23:52:22 ] Isaac Apylon > Giaus Pollux on the way?
+[ 2026.02.07 23:52:27 ] Giaus Pollux > yes, I am here
+[ 2026.02.07 23:52:55 ] razor6969 > no fireworks till poem, looking at you CCP
+[ 2026.02.07 23:52:55 ] Isaac Apylon > ty
+[ 2026.02.07 23:53:06 ] CCP Zelus > ++
+[ 2026.02.07 23:53:12 ] A Dead Parrot > hehe
+[ 2026.02.07 23:54:26 ] CCP Zelus > Made good time :)
+[ 2026.02.07 23:54:28 ] ExxeyStein > does anyone have spair small secure container?
+[ 2026.02.07 23:54:35 ] Torquay > target will be the memorial?
+[ 2026.02.07 23:54:58 ] Yoshi Katelo > Lotte-Ysabel Hemelvaart not in fleet?
+[ 2026.02.07 23:55:00 ] Xi Shan > ExxeyStein yes
+[ 2026.02.07 23:55:33 ] ExxeyStein > i got none...i didnt thought about being here like an hpur ago
+[ 2026.02.07 23:56:23 ] Xi Shan > ExxeyStein want me to eject one and you scoop it?
+[ 2026.02.07 23:56:23 ] Dry Baby > Quite the sight. Very humbling.
+[ 2026.02.07 23:56:30 ] Torquay > so, these containers have a permanent life?
+[ 2026.02.07 23:56:33 ] ExxeyStein > Xi Shan yes please if its okay
+[ 2026.02.07 23:56:34 ] Lavoleine Audier > OMG, these are persistant!  mine is still there \o/
+[ 2026.02.07 23:56:51 ] Lavoleine Audier > Thank you CCP!
+[ 2026.02.07 23:57:05 ] Giaus Pollux > This is just as real as any carved granite.
+[ 2026.02.07 23:57:13 ] Xi Shan > Lavoleine Audier cant launch too close to stuff
+[ 2026.02.07 23:58:04 ] Ben Kalkoken > o7
+[ 2026.02.07 23:58:07 ] Auds Lennelluc > o7
+[ 2026.02.07 23:58:08 ] Isaac Apylon > o7
+[ 2026.02.07 23:58:09 ] EggHead321 > o7
+[ 2026.02.07 23:58:10 ] Strelnikova > Om shanti.
+[ 2026.02.07 23:58:11 ] Torquay > o7
+[ 2026.02.07 23:58:11 ] Strelnikova > o7
+[ 2026.02.07 23:58:12 ] Kara Shi > o7
+[ 2026.02.07 23:58:13 ] CCP Aperture > o7
+[ 2026.02.07 23:58:14 ] Theo Davidson > o7
+[ 2026.02.07 23:58:15 ] Lavoleine Audier > o7
+[ 2026.02.07 23:58:16 ] Lexington Braddock > o7
+[ 2026.02.07 23:58:16 ] EggHead321 > o7
+[ 2026.02.07 23:58:16 ] Dry Baby > o7
+[ 2026.02.07 23:58:16 ] xSky Dreamer > o7
+[ 2026.02.07 23:58:16 ] Edwaren Alduin > o7
+[ 2026.02.07 23:58:19 ] ExxeyStein > o7
+[ 2026.02.07 23:58:19 ] Light Lund > o7
+[ 2026.02.07 23:58:19 ] Woldrof Baloc Thingold > o7
+[ 2026.02.07 23:58:23 ] Xi Shan > o7
+[ 2026.02.07 23:58:27 ] Katherine Skysong > o7
+[ 2026.02.07 23:58:29 ] Fierbird Altol > o7
+[ 2026.02.07 23:58:36 ] Aithra Dreamweaver > o7
+[ 2026.02.08 00:01:19 ] PixieDash > o7
+[ 2026.02.08 00:01:48 ] Auds Lennelluc > Anyone who runs out: access my fleet bay for a heap of decent fireworks.
+[ 2026.02.08 00:02:49 ] razor6969 > o7
+[ 2026.02.08 00:03:03 ] Supra yO > o7
+[ 2026.02.08 00:03:19 ] Jenny Everywhere > o7 and <3
+[ 2026.02.08 00:03:24 ] Light Lund > o7
+[ 2026.02.08 00:03:25 ] Fierbird Altol > Thank you signaleers for organizing this o7
+[ 2026.02.08 00:03:34 ] Kara Shi > o7
+[ 2026.02.08 00:03:36 ] Aithra Dreamweaver > Fierbird Altol o7
+[ 2026.02.08 00:03:45 ] ExxeyStein > Fierbird Altol o7
+[ 2026.02.08 00:03:45 ] Isaac Apylon > Fierbird Altol o7
+[ 2026.02.08 00:04:10 ] Strelnikova > Fierbird Altol o7
+[ 2026.02.08 00:04:20 ] Edwaren Alduin > Fierbird Altol o7
+[ 2026.02.08 00:04:25 ] Light Lund > Fierbird Altol o7
+[ 2026.02.08 00:04:32 ] Lavoleine Audier > Fierbird Altol o7
+[ 2026.02.08 00:04:42 ] Auds Lennelluc > Fierbird Altol o7
+[ 2026.02.08 00:06:34 ] Xavec > This is our pleasure.
+[ 2026.02.08 00:07:30 ] Xavec > While we are here. The last time I was here was for Zinov Small Secure Container
+[ 2026.02.08 00:07:49 ] Strelnikova > Glad to to have served
+[ 2026.02.08 00:08:08 ] Woldrof Baloc Thingold > Fierbird Altol o7
+[ 2026.02.08 00:08:38 ] Xavec > I must go.
+[ 2026.02.08 00:08:43 ] Kara Shi > o7
+[ 2026.02.08 00:08:44 ] Xavec > o7 to all o7 to the fallen
+[ 2026.02.08 00:08:47 ] Light Lund > Xavec o7
+[ 2026.02.08 00:08:48 ] Isaac Apylon > Xavec o7
+[ 2026.02.08 00:08:56 ] Aithra Dreamweaver > Xavec o7
+[ 2026.02.08 00:09:00 ] Dry Baby > o7
+[ 2026.02.08 00:09:13 ] Edwaren Alduin > o7
+[ 2026.02.08 00:09:23 ] Auds Lennelluc > Xavec o7
+[ 2026.02.08 00:10:04 ] Kaeracin > thank you so much guys for pulling this together so quickly I understand the logistics involved. turned out much better than I had hoped
+[ 2026.02.08 00:10:22 ] Strelnikova > Kaeracin thank you for trusting us in this
+[ 2026.02.08 00:10:31 ] Kara Shi > It's our honor, thank you Kaeracin
+[ 2026.02.08 00:10:36 ] CCP Zelus > <3
+[ 2026.02.08 00:10:37 ] Fritte Cornelius > Kaeracin all love sent to you and you family <3
+[ 2026.02.08 00:10:41 ] EggHead321 > o7
+[ 2026.02.08 00:10:45 ] razor6969 > o7  Kaeracin
+[ 2026.02.08 00:10:48 ] Torquay > o7
+[ 2026.02.08 00:10:50 ] Isaac Apylon > Kaeracin, we're all happy to be of service. My condolences for your loss.
+[ 2026.02.08 00:10:54 ] CCP Jotunn > <3 <3 <3
+[ 2026.02.08 00:11:01 ] Dry Baby > Kaeracin o7
+[ 2026.02.08 00:11:03 ] Lexington Braddock > o7
+[ 2026.02.08 00:11:04 ] razor6969 > thank you CCP and SC0UT
+[ 2026.02.08 00:11:12 ] Fierbird Altol > o7
+[ 2026.02.08 00:11:12 ] CCP Aperture > <3 o7
+[ 2026.02.08 00:11:13 ] Edwaren Alduin > Kaeracin <3
+[ 2026.02.08 00:11:14 ] Woldrof Baloc Thingold > Kaeracin <3 o7
+[ 2026.02.08 00:11:16 ] CCP Zelus > o7
+[ 2026.02.08 00:11:19 ] Theo Davidson > o7 Kaeracin <3
+[ 2026.02.08 00:11:20 ] Kara Shi > Thanks CCP o7
+[ 2026.02.08 00:11:23 ] Fierbird Altol > Kaeracin <3 o7
+[ 2026.02.08 00:11:24 ] PixieDash > Kaeracin o7 <3
+[ 2026.02.08 00:11:27 ] Auds Lennelluc > Kaeracin o7
+[ 2026.02.08 00:11:32 ] Aepus Saisorre > Thank you everyone for being here
+[ 2026.02.08 00:11:32 ] razor6969 > Kaeracin o7
+[ 2026.02.08 00:11:35 ] Yoshi Katelo > o7 to the fallen
+[ 2026.02.08 00:11:36 ] Aepus Saisorre > Kaeracin o7 <3
+[ 2026.02.08 00:11:53 ] ExxeyStein > Kaeracin o7 <3
+[ 2026.02.08 00:12:36 ] CCP Jotunn > I've got to run. Take care of each other, everyone.
+[ 2026.02.08 00:12:36 ] Ash3D > Kaeracin <3 o7
+[ 2026.02.08 00:12:44 ] Auds Lennelluc > CCP Jotunn o7
+[ 2026.02.08 00:12:50 ] Light Lund > bye bye, all o7
+[ 2026.02.08 00:12:55 ] CCP Zelus > Will also drop fleet. Thanks for having us and thank you again for this. o7
+[ 2026.02.08 00:12:59 ] Auds Lennelluc > Light Lund o7
+[ 2026.02.08 00:13:10 ] Yoshi Katelo > thanks CCP
+[ 2026.02.08 00:13:19 ] Auds Lennelluc > Dropping fleet - will hang around for a bit then take direct route back to zoo. o7
+[ 2026.02.08 00:13:30 ] Lavoleine Audier > thx  Yoshi Katelo <3
+[ 2026.02.08 00:13:36 ] Fritte Cornelius > same, going to fire more
+[ 2026.02.08 00:13:41 ] Yoshi Katelo > <3
+[ 2026.02.08 00:13:43 ] Kara Shi > Nardiarang
+[ 2026.02.08 00:13:50 ] ExxeyStein > Yoshi Katelo Thanks for notifying me :)
+[ 2026.02.08 00:14:06 ] Kara Shi > Zoohen
+[ 2026.02.08 00:14:06 ] Yoshi Katelo > glad you could be here
+[ 2026.02.08 00:32:21 ] Ben Kalkoken > Thanks Isaac, thanks Woldrof!
+[ 2026.02.08 00:32:32 ] ExxeyStein > thanks everyone
+[ 2026.02.08 00:32:51 ] Torquay > o7 thanks
+[ 2026.02.08 00:32:56 ] Woldrof Baloc Thingold > o7 thanks everyone
+[ 2026.02.08 00:33:18 ] Edwaren Alduin > Thank you, Isaac Apylon, Woldrof Baloc Thingold, Kara Shi, and all! <3
