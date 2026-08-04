@@ -1,0 +1,105 @@
+@namespace WeatherStation.Web.Components.Dashboard
+
+<RadzenCard class="rz-p-4">
+    <RadzenText TextStyle="TextStyle.H6">Pressure (inHg)</RadzenText>
+    <RadzenText TextStyle="TextStyle.Caption">
+        Shaded band shows the min&ndash;max swing within each point; the line is the average &mdash;
+        this is the metric that matters most for EDS symptom tracking. Hover for exact values.
+    </RadzenText>
+
+    <RadzenChart style="height: 350px;">
+        <RadzenChartTooltipOptions Shared="true" />
+        <RadzenCategoryAxis Min="@FromLocal" Max="@ToLocal" Formatter="@FormatAxisLabel" Padding="10" />
+        <RadzenValueAxis Min="@AxisMin" Max="@AxisMax" Step="0.1" Formatter="@(v => Convert.ToDouble(v).ToString("0.00"))">
+            <RadzenGridLines Visible="true" />
+        </RadzenValueAxis>
+
+        @* Layering trick for a min-max band: draw Max filled down to the axis baseline,
+           then draw Min filled in the card's background color on top of it — this
+           "erases" everything below Min, leaving only the Min-Max band visible. Each
+           series gets its OWN data collection (MaxBandRows/MinBandRows) rather than
+           sharing @Rows -- Radzen otherwise renders two area series bound to the same
+           Data+CategoryProperty with an identical path regardless of ValueProperty. *@
+        <RadzenAreaSeries Data="@MaxBandRows" CategoryProperty="LocalTime" ValueProperty="MaxValue"
+                           Title="Max" Fill="#f2c8c8" Stroke="transparent" />
+        <RadzenAreaSeries Data="@MinBandRows" CategoryProperty="LocalTime" ValueProperty="MinValue"
+                           Title="Min" Fill="white" Stroke="transparent" />
+        <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="PressureAvgInHg"
+                           Title="Pressure" Stroke="#c0392b" StrokeWidth="2" />
+
+        @* Each secondary location overlays just its average line -- no permanent
+           markers; hovering shows the exact value (and Min/Max) via the shared tooltip. *@
+        @foreach (var overlay in Overlays)
+        {
+            <RadzenLineSeries Data="@overlay.Points" CategoryProperty="LocalTime" ValueProperty="AvgInHg"
+                               Title="@overlay.Name" Stroke="@overlay.Color" StrokeWidth="2" />
+        }
+    </RadzenChart>
+</RadzenCard>
+
+@code {
+    [Parameter] public IReadOnlyList<ChartRow> Rows { get; set; } = [];
+    [Parameter] public IReadOnlyList<PressureOverlaySeries> Overlays { get; set; } = [];
+    [Parameter] public RangePreset SelectedRange { get; set; }
+    [Parameter] public DateTime FromLocal { get; set; }
+    [Parameter] public DateTime ToLocal { get; set; }
+
+    private sealed record MaxBandPoint(DateTime LocalTime, decimal? MaxValue);
+    private sealed record MinBandPoint(DateTime LocalTime, decimal? MinValue);
+
+    private IReadOnlyList<MaxBandPoint> MaxBandRows => Rows.Select(r => new MaxBandPoint(r.LocalTime, r.PressureMaxInHg)).ToList();
+    private IReadOnlyList<MinBandPoint> MinBandRows => Rows.Select(r => new MinBandPoint(r.LocalTime, r.PressureMinInHg)).ToList();
+
+    // ±0.5 inHg is the minimum window, centered on this period's average pressure
+    // (rounded to a clean 0.1) -- keeps the visual "zoom level" consistent across quiet
+    // days instead of auto-scaling to whatever tiny range the data happens to span. But
+    // it's a floor, not a clamp: if actual swings exceed it, the half-span steps up in
+    // 0.5 increments (±0.5, ±1.0, ±1.5, ...) so real data is never clipped off-chart.
+    private const double MinHalfSpanInHg = 0.5;
+    private const double HalfSpanStepInHg = 0.5;
+
+    private double AxisCenter
+    {
+        get
+        {
+            var values = Rows.Where(r => r.PressureAvgInHg.HasValue).Select(r => (double)r.PressureAvgInHg!.Value).ToList();
+            var avg = values.Count > 0 ? values.Average() : 29.9;
+            return Math.Round(avg, 1);
+        }
+    }
+
+    private double AxisHalfSpan
+    {
+        get
+        {
+            var mins = Rows.Where(r => r.PressureMinInHg.HasValue).Select(r => (double)r.PressureMinInHg!.Value)
+                .Concat(Overlays.SelectMany(o => o.Points).Where(p => p.MinInHg.HasValue).Select(p => (double)p.MinInHg!.Value))
+                .ToList();
+            var maxes = Rows.Where(r => r.PressureMaxInHg.HasValue).Select(r => (double)r.PressureMaxInHg!.Value)
+                .Concat(Overlays.SelectMany(o => o.Points).Where(p => p.MaxInHg.HasValue).Select(p => (double)p.MaxInHg!.Value))
+                .ToList();
+            if (mins.Count == 0 || maxes.Count == 0) return MinHalfSpanInHg;
+
+            var center = AxisCenter;
+            var required = Math.Max(center - mins.Min(), maxes.Max() - center);
+            if (required <= MinHalfSpanInHg) return MinHalfSpanInHg;
+
+            return Math.Ceiling(required / HalfSpanStepInHg) * HalfSpanStepInHg;
+        }
+    }
+
+    private double AxisMin => AxisCenter - AxisHalfSpan;
+    private double AxisMax => AxisCenter + AxisHalfSpan;
+
+    private string FormatAxisLabel(object value)
+    {
+        var dt = (DateTime)value;
+        return SelectedRange switch
+        {
+            RangePreset.Day => dt.ToString("h tt"),
+            RangePreset.Week => dt.ToString("ddd h tt"),
+            RangePreset.Month => dt.ToString("MMM d"),
+            _ => dt.ToString("MMM yyyy"),
+        };
+    }
+}
