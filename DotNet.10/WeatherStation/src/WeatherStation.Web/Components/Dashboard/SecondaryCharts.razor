@@ -1,0 +1,69 @@
+@namespace WeatherStation.Web.Components.Dashboard
+
+<RadzenRow Gap="1rem" class="rz-mt-3">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenCard class="rz-p-4">
+            <RadzenText TextStyle="TextStyle.Subtitle1">Temperature</RadzenText>
+            <RadzenChart style="height: 200px;">
+                <RadzenCategoryAxis Min="@FromLocal" Max="@ToLocal" Formatter="@FormatAxisLabel" />
+                <RadzenValueAxis><RadzenGridLines Visible="true" /></RadzenValueAxis>
+                <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="TempAvgF" Title="Temp" Stroke="#7f8c8d" />
+                <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="FeelsLikeAvgF" Title="Feels Like" Stroke="#e67e22" />
+                <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="DewpointAvgF" Title="Dewpoint" Stroke="#2980b9" />
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenCard class="rz-p-4">
+            <RadzenText TextStyle="TextStyle.Subtitle1">Humidity (%)</RadzenText>
+            <RadzenChart style="height: 200px;">
+                <RadzenCategoryAxis Min="@FromLocal" Max="@ToLocal" Formatter="@FormatAxisLabel" />
+                <RadzenValueAxis Min="0" Max="100"><RadzenGridLines Visible="true" /></RadzenValueAxis>
+                <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="HumidityAvgPct" Title="Humidity" Stroke="#16a085" />
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenCard class="rz-p-4">
+            <RadzenText TextStyle="TextStyle.Subtitle1">Wind (mph)</RadzenText>
+            <RadzenChart style="height: 200px;">
+                <RadzenCategoryAxis Min="@FromLocal" Max="@ToLocal" Formatter="@FormatAxisLabel" />
+                <RadzenValueAxis><RadzenGridLines Visible="true" /></RadzenValueAxis>
+                <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="WindSpeedAvgMph" Title="Speed" Stroke="#8e44ad" />
+                <RadzenLineSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="WindGustMaxMph" Title="Gust" Stroke="#bdc3c7" />
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenCard class="rz-p-4">
+            <RadzenText TextStyle="TextStyle.Subtitle1">Precipitation (in)</RadzenText>
+            <RadzenChart style="height: 200px;">
+                <RadzenCategoryAxis Min="@FromLocal" Max="@ToLocal" Formatter="@FormatAxisLabel" />
+                <RadzenValueAxis><RadzenGridLines Visible="true" /></RadzenValueAxis>
+                <RadzenColumnSeries Data="@Rows" CategoryProperty="LocalTime" ValueProperty="PrecipAvgInPerHr" Title="Precip" Fill="#3498db" />
+            </RadzenChart>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+
+@code {
+    [Parameter] public IReadOnlyList<ChartRow> Rows { get; set; } = [];
+    [Parameter] public RangePreset SelectedRange { get; set; }
+    [Parameter] public DateTime FromLocal { get; set; }
+    [Parameter] public DateTime ToLocal { get; set; }
+
+    private string FormatAxisLabel(object value)
+    {
+        var dt = (DateTime)value;
+        return SelectedRange switch
+        {
+            RangePreset.Day => dt.ToString("h tt"),
+            RangePreset.Week => dt.ToString("ddd h tt"),
+            RangePreset.Month => dt.ToString("MMM d"),
+            _ => dt.ToString("MMM yyyy"),
+        };
+    }
+}
