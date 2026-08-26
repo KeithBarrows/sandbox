@@ -1,0 +1,17 @@
+@namespace WeatherStation.Web.Components.Dashboard
+
+<RadzenStack Orientation="Radzen.Orientation.Horizontal" Gap="0.5rem">
+    <RadzenButton Text="1 Day" ButtonStyle="@(SelectedRange == RangePreset.Day ? ButtonStyle.Primary : ButtonStyle.Light)"
+                  Click="@(() => OnRangeChanged.InvokeAsync(RangePreset.Day))" />
+    <RadzenButton Text="1 Week" ButtonStyle="@(SelectedRange == RangePreset.Week ? ButtonStyle.Primary : ButtonStyle.Light)"
+                  Click="@(() => OnRangeChanged.InvokeAsync(RangePreset.Week))" />
+    <RadzenButton Text="1 Month" ButtonStyle="@(SelectedRange == RangePreset.Month ? ButtonStyle.Primary : ButtonStyle.Light)"
+                  Click="@(() => OnRangeChanged.InvokeAsync(RangePreset.Month))" />
+    <RadzenButton Text="1 Year" ButtonStyle="@(SelectedRange == RangePreset.Year ? ButtonStyle.Primary : ButtonStyle.Light)"
+                  Click="@(() => OnRangeChanged.InvokeAsync(RangePreset.Year))" />
+</RadzenStack>
+
+@code {
+    [Parameter] public RangePreset SelectedRange { get; set; }
+    [Parameter] public EventCallback<RangePreset> OnRangeChanged { get; set; }
+}

@@ -1,0 +1,214 @@
+@page "/"
+@rendermode InteractiveServer
+@implements IAsyncDisposable
+@using Microsoft.Extensions.Options
+@using WeatherStation.Data.Options
+@using WeatherStation.Web.Components.Dashboard
+@using WeatherStation.Web.Services
+@inject IWeatherQueryService QueryService
+@inject IOptions<List<LocationOptions>> LocationOptionsAccessor
+@inject WeatherUpdateNotifier Notifier
+@inject ILogger<Dashboard> Logger
+
+<PageTitle>Weather - @primaryLocation.DisplayName</PageTitle>
+
+<RadzenStack Gap="1rem" class="rz-p-4" Style="width: 100%; max-width: 1400px; margin: 0 auto; box-sizing: border-box;">
+    <RadzenText TextStyle="TextStyle.H4">@primaryLocation.DisplayName Weather</RadzenText>
+
+    <CurrentConditionsCard Latest="@latest" />
+
+    <RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center" Gap="1rem" Wrap="Radzen.FlexWrap.Wrap">
+        <RangeSelector SelectedRange="@selectedRange" OnRangeChanged="@OnRangeChangedAsync" />
+
+        @if (selectedRange is RangePreset.Month or RangePreset.Year)
+        {
+            <RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center" Gap="0.5rem">
+                <RadzenButton Icon="chevron_left" Text="Back" ButtonStyle="ButtonStyle.Light" Click="@(() => NavigatePeriodAsync(1))" />
+                <RadzenText TextStyle="TextStyle.Subtitle1">@PeriodLabel</RadzenText>
+                <RadzenButton Icon="chevron_right" Text="Forward" ButtonStyle="ButtonStyle.Light"
+                              Disabled="@(CurrentPeriodOffset == 0)" Click="@(() => NavigatePeriodAsync(-1))" />
+            </RadzenStack>
+        }
+    </RadzenStack>
+
+    <PressureChart Rows="@chartRows" Overlays="@pressureOverlays" SelectedRange="@selectedRange" FromLocal="@fromLocal" ToLocal="@toLocal" />
+
+    <SecondaryCharts Rows="@chartRows" SelectedRange="@selectedRange" FromLocal="@fromLocal" ToLocal="@toLocal" />
+</RadzenStack>
+
+@code {
+    // A different color per secondary location, cycled if there are ever more than four.
+    private static readonly string[] OverlayColors = ["#2980b9", "#27ae60", "#f39c12", "#8e44ad"];
+
+    private LocationOptions primaryLocation = new();
+    private List<LocationOptions> secondaryLocations = [];
+
+    private WeatherObservation? latest;
+    private List<ChartRow> chartRows = [];
+    private List<PressureOverlaySeries> pressureOverlays = [];
+    private RangePreset selectedRange = RangePreset.Day;
+    private TimeZoneInfo timeZone = TimeZoneInfo.Utc;
+    private DateTime fromLocal;
+    private DateTime toLocal;
+
+    // Independent so switching between Month/Year and back remembers nothing --
+    // reselecting a preset always starts back at the current period (offset 0).
+    private int monthOffset;
+    private int yearOffset;
+
+    private int CurrentPeriodOffset => selectedRange == RangePreset.Year ? yearOffset : monthOffset;
+
+    private string PeriodLabel
+    {
+        get
+        {
+            var nowLocal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, timeZone);
+            return selectedRange switch
+            {
+                RangePreset.Year => (nowLocal.Year - yearOffset).ToString(),
+                _ => new DateTime(nowLocal.Year, nowLocal.Month, 1).AddMonths(-monthOffset).ToString("MMMM yyyy"),
+            };
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var locations = LocationOptionsAccessor.Value;
+        primaryLocation = locations.FirstOrDefault(l => l.IsPrimary) ?? locations.First();
+        secondaryLocations = locations.Where(l => l.Key != primaryLocation.Key).ToList();
+
+        try
+        {
+            timeZone = TimeZoneInfo.FindSystemTimeZoneById(primaryLocation.TimeZone);
+        }
+        catch (TimeZoneNotFoundException ex)
+        {
+            Logger.LogWarning(ex, "Configured TimeZone {TimeZoneId} not found on this system; falling back to UTC.",
+                primaryLocation.TimeZone);
+            timeZone = TimeZoneInfo.Utc;
+        }
+
+        await RefreshLatestAsync();
+        await LoadChartsAsync();
+
+        Notifier.Updated += OnDataUpdated;
+    }
+
+    private void OnDataUpdated()
+    {
+        // Fired from the collector's background thread once a new observation (and its
+        // forecast) is saved -- marshal onto the renderer's sync context so this never
+        // races with a user-initiated event using the same scoped DbContext.
+        _ = InvokeAsync(async () =>
+        {
+            await RefreshLatestAsync();
+            await LoadChartsAsync();
+            StateHasChanged();
+        });
+    }
+
+    private async Task RefreshLatestAsync()
+    {
+        latest = await QueryService.GetLatestAsync(primaryLocation.Key, CancellationToken.None);
+    }
+
+    private async Task OnRangeChangedAsync(RangePreset range)
+    {
+        selectedRange = range;
+        monthOffset = 0;
+        yearOffset = 0;
+        await LoadChartsAsync();
+    }
+
+    private async Task NavigatePeriodAsync(int delta)
+    {
+        if (selectedRange == RangePreset.Year)
+            yearOffset = Math.Max(0, yearOffset + delta);
+        else
+            monthOffset = Math.Max(0, monthOffset + delta);
+
+        await LoadChartsAsync();
+    }
+
+    private async Task LoadChartsAsync()
+    {
+        var nowUtc = DateTime.UtcNow;
+        var nowLocal = TimeZoneInfo.ConvertTimeFromUtc(nowUtc, timeZone);
+
+        DateTime fromUtc, toUtc;
+        BucketSize bucketSize;
+
+        switch (selectedRange)
+        {
+            case RangePreset.Week:
+                fromUtc = nowUtc.AddDays(-7);
+                toUtc = nowUtc;
+                bucketSize = BucketSize.Raw;
+                break;
+
+            case RangePreset.Month:
+            {
+                var monthStartLocal = new DateTime(nowLocal.Year, nowLocal.Month, 1).AddMonths(-monthOffset);
+                var monthEndLocal = monthStartLocal.AddMonths(1);
+                fromUtc = TimeZoneInfo.ConvertTimeToUtc(monthStartLocal, timeZone);
+                toUtc = TimeZoneInfo.ConvertTimeToUtc(monthEndLocal, timeZone);
+                bucketSize = BucketSize.Hour;
+                break;
+            }
+
+            case RangePreset.Year:
+            {
+                var yearStartLocal = new DateTime(nowLocal.Year - yearOffset, 1, 1);
+                var yearEndLocal = yearStartLocal.AddYears(1);
+                fromUtc = TimeZoneInfo.ConvertTimeToUtc(yearStartLocal, timeZone);
+                toUtc = TimeZoneInfo.ConvertTimeToUtc(yearEndLocal, timeZone);
+                bucketSize = BucketSize.Day;
+                break;
+            }
+
+            default: // Day
+                fromUtc = nowUtc.AddDays(-1);
+                toUtc = nowUtc;
+                bucketSize = BucketSize.Raw;
+                break;
+        }
+
+        var points = await QueryService.GetBucketedAsync(primaryLocation.Key, fromUtc, toUtc, bucketSize, CancellationToken.None);
+
+        // Set explicitly rather than left to auto-scale from the data's own extent --
+        // otherwise a range with a gap or a partial period renders a shrunken axis
+        // instead of the full requested window (a full 24h, a full calendar month, etc).
+        fromLocal = TimeZoneInfo.ConvertTimeFromUtc(fromUtc, timeZone);
+        toLocal = TimeZoneInfo.ConvertTimeFromUtc(toUtc, timeZone);
+
+        chartRows = points.Select(p => new ChartRow(
+            TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind(p.BucketStartUtc, DateTimeKind.Utc), timeZone),
+            p.PressureMinInHg, p.PressureMaxInHg, p.PressureAvgInHg,
+            p.TempAvgF, p.FeelsLikeAvgF, p.DewpointAvgF,
+            p.HumidityAvgPct, p.WindSpeedAvgMph, p.WindGustMaxMph,
+            p.PrecipAvgInPerHr, p.UvAvg)).ToList();
+
+        var overlays = new List<PressureOverlaySeries>();
+        for (var i = 0; i < secondaryLocations.Count; i++)
+        {
+            var location = secondaryLocations[i];
+            var pressurePoints = await QueryService.GetPressureBucketedAsync(location.Key, fromUtc, toUtc, bucketSize, CancellationToken.None);
+
+            // Converted to the PRIMARY location's time zone, not this location's own --
+            // both series share one category axis, so a given UTC instant must land at
+            // the same X position regardless of which location it came from.
+            var overlayPoints = pressurePoints.Select(p => new PressureOverlayPoint(
+                TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind(p.BucketStartUtc, DateTimeKind.Utc), timeZone),
+                p.PressureMinInHg, p.PressureMaxInHg, p.PressureAvgInHg)).ToList();
+
+            overlays.Add(new PressureOverlaySeries(location.DisplayName, OverlayColors[i % OverlayColors.Length], overlayPoints));
+        }
+        pressureOverlays = overlays;
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        Notifier.Updated -= OnDataUpdated;
+        return ValueTask.CompletedTask;
+    }
+}
