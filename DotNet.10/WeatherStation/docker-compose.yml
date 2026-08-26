@@ -1,0 +1,13 @@
+services:
+  seq:
+    image: datalust/seq:latest
+    container_name: weatherstation-seq
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_NOAUTHENTICATION=true
+    ports:
+      - "8080:80"     # web UI: http://localhost:8080
+      - "5341:5341"   # ingestion API (Serilog.Sinks.Seq points here)
+    volumes:
+      - E:\Logs\Serilog\seq:/data

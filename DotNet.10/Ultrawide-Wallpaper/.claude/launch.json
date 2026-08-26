@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "weatherstation-web",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": [
+        "run",
+        "--project",
+        "D:\\Repos\\KeithBarrows\\sandbox-1\\DotNet.10\\WeatherStation\\src\\WeatherStation.Web\\WeatherStation.Web.csproj"
+      ],
+      "port": 5068
+    }
+  ]
+}
