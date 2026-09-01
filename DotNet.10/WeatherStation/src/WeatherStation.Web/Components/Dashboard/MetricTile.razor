@@ -1,0 +1,12 @@
+@namespace WeatherStation.Web.Components.Dashboard
+
+<RadzenColumn Size="6" SizeMD="3">
+    <RadzenText TextStyle="TextStyle.Overline">@Label</RadzenText>
+    <RadzenText TextStyle="TextStyle.Subtitle1">@Value <span class="rz-text-muted">@Unit</span></RadzenText>
+</RadzenColumn>
+
+@code {
+    [Parameter] public string Label { get; set; } = "";
+    [Parameter] public string Value { get; set; } = "";
+    [Parameter] public string Unit { get; set; } = "";
+}

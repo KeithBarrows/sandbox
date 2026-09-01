@@ -1,0 +1,52 @@
+@namespace WeatherStation.Web.Components.Dashboard
+
+<RadzenCard class="rz-p-4">
+    <RadzenText TextStyle="TextStyle.Overline">Current Conditions</RadzenText>
+
+    @if (Latest is null)
+    {
+        <RadzenText TextStyle="TextStyle.Body1">No data yet &mdash; waiting for the first poll (or historical backfill) to complete.</RadzenText>
+    }
+    else
+    {
+        <RadzenRow Gap="2rem" class="rz-mt-2">
+            <RadzenColumn Size="12" SizeMD="4">
+                <RadzenText TextStyle="TextStyle.Overline">Pressure</RadzenText>
+                <RadzenText TextStyle="TextStyle.DisplayH3" class="rz-color-danger-dark">
+                    @FormatValue(Latest.PressureInHg, "0.00") <span style="font-size: 1.2rem;">inHg</span>
+                </RadzenText>
+            </RadzenColumn>
+
+            <RadzenColumn Size="12" SizeMD="8">
+                <RadzenRow Gap="1.5rem">
+                    <MetricTile Label="Temp" Value="@FormatValue(Latest.TempF, "0.0")" Unit="°F" />
+                    <MetricTile Label="Feels Like" Value="@FormatValue(Latest.FeelsLikeF, "0.0")" Unit="°F" />
+                    <MetricTile Label="Dewpoint" Value="@FormatValue(Latest.DewpointF, "0.0")" Unit="°F" />
+                    <MetricTile Label="Humidity" Value="@FormatValue(Latest.HumidityPct, "0")" Unit="%" />
+                    <MetricTile Label="Wind / Gust"
+                                Value="@($"{FormatValue(Latest.WindSpeedMph, "0.0")} / {FormatValue(Latest.WindGustMph, "0.0")}")"
+                                Unit="mph" />
+                    <MetricTile Label="Precip (recent)" Value="@FormatValue(Latest.PrecipInPerHr, "0.00")" Unit="in" />
+                    <MetricTile Label="UV" Value="@FormatValue(Latest.UvIndex, "0.0")" Unit="" />
+                </RadzenRow>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenText TextStyle="TextStyle.Caption" class="rz-mt-2">
+            As of @Latest.ObservedAtUtc.ToLocalTime().ToString("g") (@Latest.Source)
+        </RadzenText>
+    }
+</RadzenCard>
+
+@code {
+    [Parameter] public WeatherObservation? Latest { get; set; }
+
+    private static string FormatValue(double? value, string format) =>
+        value.HasValue ? value.Value.ToString(format) : "—";
+
+    private static string FormatValue(decimal? value, string format) =>
+        value.HasValue ? value.Value.ToString(format) : "—";
+
+    private static string FormatValue(int? value, string format) =>
+        value.HasValue ? value.Value.ToString(format) : "—";
+}
