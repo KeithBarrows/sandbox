@@ -73,7 +73,30 @@ try
     using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<WeatherDbContext>();
-        db.Database.Migrate();
+
+        // At boot, LocalSystem auto-starts this service immediately, but Docker (and the
+        // Postgres container inside it) often isn't listening on 54322 yet -- without
+        // retrying, the first connection attempt fails fast, the host exits, and Windows
+        // spends ~20 minutes waiting on a process that already died before giving up and
+        // marking the service failed. Retrying here for a few minutes gives Docker/Postgres
+        // time to catch up instead.
+        const int maxAttempts = 20;
+        var retryDelay = TimeSpan.FromSeconds(15);
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            try
+            {
+                db.Database.Migrate();
+                break;
+            }
+            catch (Exception ex) when (attempt < maxAttempts)
+            {
+                Log.Warning(ex,
+                    "Database not reachable yet (attempt {Attempt}/{MaxAttempts}); retrying in {Delay}...",
+                    attempt, maxAttempts, retryDelay);
+                Thread.Sleep(retryDelay);
+            }
+        }
     }
 
     // Configure the HTTP request pipeline. Plain HTTP only (no HTTPS redirect/HSTS) --
