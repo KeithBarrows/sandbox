@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "open-brain": {
+      "type": "http",
+      "url": "https://sawydjekftfntixmpplc.supabase.co/functions/v1/open-brain-mcp",
+      "headers": {
+        "x-brain-key": "${OPEN_BRAIN_KEY}"
+      }
+    },
+    "plane": {
+      "type": "http",
+      "url": "https://mcp.plane.so/http/mcp"
+    },
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=sawydjekftfntixmpplc&features=database"
+    },
+    "vision-board-builder": {
+      "type": "http",
+      "url": "https://qvlkzrrgmghzoaobwwvi.supabase.co/functions/v1/mcp"
+    }
+  }
+}

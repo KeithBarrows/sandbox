@@ -1,0 +1,14 @@
+[mcp_servers.open-brain]
+url = "https://sawydjekftfntixmpplc.supabase.co/functions/v1/open-brain-mcp"
+
+[mcp_servers.open-brain.env_http_headers]
+x-brain-key = "OPEN_BRAIN_KEY"
+
+[mcp_servers.plane]
+url = "https://mcp.plane.so/http/mcp"
+
+[mcp_servers.supabase]
+url = "https://mcp.supabase.com/mcp?project_ref=sawydjekftfntixmpplc&features=database"
+
+[mcp_servers.vision-board-builder]
+url = "https://qvlkzrrgmghzoaobwwvi.supabase.co/functions/v1/mcp"
