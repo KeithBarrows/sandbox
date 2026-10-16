@@ -1,0 +1,26 @@
+# General description
+
+- Folder naming is as follows:
+  - a-[title] = an album tag
+  - c-[title] = a category tag
+  - h-[title] = a highlight tag
+  - p-[title] = a person tag
+  - g-[title] = a gallery of associated images
+  - s-[title] = a studio producing works
+- Folder tree:
+  - Each parent folder is a tag for any file at the deepest part of the direct path tree
+  - A folder tree can have several of the same types of tags
+  - Some tags are infinite (people, studios for example)
+  - Some tags are finite (categories, highlights for example)
+- Data store 
+  - Should be fast retrieval
+  - Something like Supabase (in docker)
+  - Each image/video can have 1 to many tags
+- Web display
+  - Localhost only (OWIN)
+  - 2 distinct screens:
+    - 1) Gallery of images in left hand column about 75% of the width, tag clouds in the right hand column about 25% of the width
+      - Width is always the browser width, 10px margin around the body
+    - 2) Single image selected from the gallery, no tag clouds, full width, maximize as much as possible, include a return to gallery button
+    - Header bar with main tags, selecting one here displays all the tags associated (Albums, Categories, Highlights, etc)
+  - Startup is a random tag category, random starting image, continue in order the other images with the same tag
